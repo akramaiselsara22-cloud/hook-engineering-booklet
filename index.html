@@ -1,0 +1,3680 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>هندسة الهوك لصناعة المحتوى والتسويق الرقمي | إعداد: Abo Aisel • AI Navigators</title>
+  
+  <!-- خطوط Google Fonts العربية الحديثة -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==================== المتغيرات والتنسيق الأساسي ==================== */
+    :root {
+      /* الوضع الداكن الافتراضي (Cyber Dark Slate) */
+      --bg-primary: #070d18;
+      --bg-surface: #0e1726;
+      --bg-card: #142033;
+      --bg-card-hover: #1b2a44;
+      --bg-card-alt: #16253d;
+      --bg-input: rgba(7, 13, 24, 0.85);
+      
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --accent-hook: #f97316;       /* برتقالي حيوي لشرارة الهوك */
+      --accent-hook-glow: rgba(249, 115, 22, 0.28);
+      --accent-cyan: #00f0ff;       /* سماوي سايبر تقني */
+      --accent-cyan-glow: rgba(0, 240, 255, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-gold: #fbbf24;
+      --accent-gold-glow: rgba(251, 191, 36, 0.2);
+      --accent-green: #22c55e;
+      --accent-purple: #a855f7;
+      
+      --border-color: #1e293b;
+      --border-glow: rgba(56, 189, 248, 0.2);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 35px rgba(56, 189, 248, 0.15);
+      
+      --font-heading: 'Cairo', system-ui, -apple-system, sans-serif;
+      --font-body: 'Tajawal', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* سمة الوضع الفاتح (Light Editorial Theme) */
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #f1f5f9;
+      --bg-card-hover: #e2e8f0;
+      --bg-card-alt: #eef2f6;
+      --bg-input: #ffffff;
+      
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      
+      --accent-hook: #ea580c;
+      --accent-hook-glow: rgba(234, 88, 12, 0.2);
+      --accent-cyan: #0284c7;
+      --accent-cyan-glow: rgba(2, 132, 199, 0.15);
+      --accent-blue: #0369a1;
+      --accent-gold: #d97706;
+      --accent-gold-glow: rgba(217, 119, 6, 0.15);
+      --accent-green: #16a34a;
+      --accent-purple: #9333ea;
+      
+      --border-color: #cbd5e1;
+      --border-glow: rgba(2, 132, 199, 0.2);
+      
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.08);
+      --shadow-glow: 0 0 25px rgba(2, 132, 199, 0.1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.8;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% -20%, rgba(30, 58, 138, 0.25) 0%, var(--bg-primary) 70%);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* شريط التقدم العلوي */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-hook), var(--accent-gold));
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.1s ease-out;
+    }
+
+    /* شريط التنقل العلوي التفاعلي */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(7, 13, 24, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="light"] .top-nav {
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .brand-mini {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-mini-badge {
+      background: linear-gradient(135deg, var(--accent-hook), #ea580c);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px var(--accent-hook-glow);
+    }
+
+    .brand-mini-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    [data-theme="light"] .btn-nav {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      transform: translateY(-1px);
+    }
+
+    .btn-nav-primary {
+      background: linear-gradient(135deg, var(--accent-hook), #ea580c);
+      border: none;
+      color: #fff;
+      box-shadow: 0 2px 10px var(--accent-hook-glow);
+    }
+
+    .btn-nav-primary:hover {
+      background: linear-gradient(135deg, #fb923c, var(--accent-hook));
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+    }
+
+    /* الحاوية الرئيسية للكتاب */
+    .booklet-container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem 1.5rem;
+    }
+
+    /* شريط البحث والتصفية الحي (Live Filter Bar) */
+    .filter-sticky-bar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input-wrapper span {
+      position: absolute;
+      right: 1rem;
+      color: var(--text-dim);
+      font-size: 1.1rem;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 2.75rem 0.75rem 1rem;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan-glow);
+    }
+
+    .category-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .chip-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-family: var(--font-heading);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip-btn:hover, .chip-btn.active {
+      background: var(--accent-hook);
+      border-color: var(--accent-hook);
+      color: #fff;
+    }
+
+    /* الغلاف الأمامي */
+    .book-cover {
+      background: linear-gradient(180deg, rgba(20, 32, 51, 0.95) 0%, rgba(10, 18, 32, 0.98) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 2.75rem 2rem;
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow-md), var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    [data-theme="light"] .book-cover {
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      color: #fff;
+    }
+
+    .cover-banner-img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .cover-badge-top {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.4rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.25rem;
+    }
+
+    .cover-title {
+      font-family: var(--font-heading);
+      font-size: 2.9rem;
+      font-weight: 900;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .cover-title span {
+      background: linear-gradient(135deg, var(--accent-hook), #fed7aa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .cover-subtitle {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      max-width: 720px;
+      margin: 0 auto 1.75rem auto;
+      font-weight: 400;
+    }
+
+    .cover-stats-pill {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      background: rgba(14, 23, 38, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 2rem;
+      font-size: 0.92rem;
+      color: #e2e8f0;
+    }
+
+    .cover-stats-pill strong {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .cover-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .cover-author {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+
+    .cover-author-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-hook), #ea580c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 2px 10px var(--accent-hook-glow);
+    }
+
+    .cover-edition {
+      color: var(--text-dim);
+      font-size: 0.88rem;
+    }
+
+    /* صفحة البيانات والحقوق */
+    .colophon-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      margin-bottom: 2.5rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .colophon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .colophon-item strong {
+      display: block;
+      color: var(--text-main);
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* بطاقة الإهداء */
+    .dedication-card {
+      background: radial-gradient(circle at top right, rgba(251, 191, 36, 0.09) 0%, var(--bg-surface) 70%);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: var(--radius-md);
+      padding: 2.25rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .dedication-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+    }
+
+    .dedication-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    .dedication-text {
+      font-size: 1.12rem;
+      line-height: 2;
+      color: var(--text-main);
+      max-width: 740px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    .dedication-sign {
+      margin-top: 1.25rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--accent-cyan);
+      font-size: 0.95rem;
+    }
+
+    /* الفهرس التفاعلي */
+    .toc-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      margin-bottom: 3rem;
+    }
+
+    .toc-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .toc-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0.9rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: all 0.2s ease;
+    }
+
+    .toc-link:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: var(--accent-cyan);
+      color: var(--text-main);
+      transform: translateX(-3px);
+    }
+
+    .toc-num {
+      font-family: var(--font-mono);
+      color: var(--accent-hook);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* أقسام المحتوى */
+    .book-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-badge {
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--accent-hook);
+      border: 1px solid var(--accent-hook);
+      font-size: 0.8rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    /* الصناديق الإرشادية */
+    .callout-box {
+      background: var(--bg-surface);
+      border-right: 4px solid var(--accent-hook);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      border-left: 1px solid var(--border-color);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .callout-cyan {
+      border-right-color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.03);
+    }
+
+    .callout-gold {
+      border-right-color: var(--accent-gold);
+      background: rgba(251, 191, 36, 0.03);
+    }
+
+    .callout-purple {
+      border-right-color: var(--accent-purple);
+      background: rgba(168, 85, 247, 0.04);
+    }
+
+    .callout-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* بطاقة الفئة (Category Card) */
+    .category-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      margin-bottom: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .category-card.hidden {
+      display: none !important;
+    }
+
+    .category-card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .category-id {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .category-heading {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 0.25rem;
+    }
+
+    .category-description {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    /* بنود المعادلات */
+    .formula-unit {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      transition: background 0.2s ease;
+    }
+
+    .formula-unit:last-child {
+      margin-bottom: 0;
+    }
+
+    .formula-title {
+      font-family: var(--font-heading);
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .formula-strip {
+      background: rgba(249, 115, 22, 0.09);
+      border: 1px dashed rgba(249, 115, 22, 0.4);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: #fed7aa;
+      margin-bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    [data-theme="light"] .formula-strip {
+      background: #fff7ed;
+      color: #9a3412;
+      border-color: #fdba74;
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    [data-theme="light"] .copy-btn {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-hook);
+      border-color: var(--accent-hook);
+      color: #fff;
+      transform: scale(1.04);
+    }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 680px) {
+      .example-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .example-pill {
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.85rem;
+      font-size: 0.88rem;
+      border-right: 3px solid var(--accent-cyan);
+      color: var(--text-main);
+    }
+
+    [data-theme="light"] .example-pill {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-right: 3px solid var(--accent-cyan);
+    }
+
+    .example-pill-label {
+      display: block;
+      color: var(--accent-cyan);
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      font-family: var(--font-heading);
+    }
+
+    .example-pill.content {
+      border-right-color: var(--accent-purple);
+    }
+
+    .example-pill.content .example-pill-label {
+      color: var(--accent-purple);
+    }
+
+    .category-audit-footer {
+      background: rgba(15, 23, 42, 0.6);
+      border-top: 1px solid var(--border-color);
+      margin-top: 1.25rem;
+      padding-top: 0.85rem;
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* الجداول */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: var(--bg-card);
+      color: var(--accent-cyan);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 0.9rem 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.9rem 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* شبكة بطاقات المنصات */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .platform-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .platform-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .platform-structure {
+      background: rgba(0, 0, 0, 0.25);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      color: var(--accent-gold);
+      font-family: var(--font-heading);
+      margin-bottom: 0.75rem;
+    }
+
+    [data-theme="light"] .platform-structure {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .platform-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+      flex-grow: 1;
+    }
+
+    .platform-example {
+      background: rgba(249, 115, 22, 0.08);
+      border-right: 3px solid var(--accent-hook);
+      padding: 0.6rem 0.8rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      color: #fed7aa;
+    }
+
+    [data-theme="light"] .platform-example {
+      color: #9a3412;
+      background: #fff7ed;
+    }
+
+    /* حاسبة مقياس التقييم التفاعلية (Interactive Rubric Calculator) */
+    .rubric-calculator {
+      background: var(--bg-surface);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-top: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .rubric-criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .rubric-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+    }
+
+    .rubric-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .rubric-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    .rubric-val {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--accent-hook);
+      font-size: 1.1rem;
+    }
+
+    .rubric-slider {
+      width: 100%;
+      accent-color: var(--accent-hook);
+      cursor: pointer;
+    }
+
+    .rubric-result-box {
+      background: linear-gradient(135deg, rgba(14, 23, 38, 0.9) 0%, rgba(20, 32, 51, 0.95) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    [data-theme="light"] .rubric-result-box {
+      background: #f1f5f9;
+    }
+
+    .rubric-score-display {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .score-number {
+      font-family: var(--font-mono);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+    }
+
+    .score-verdict-badge {
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    /* قائمة المراجعة التفاعلية */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .checklist-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .checklist-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .checklist-checkbox {
+      margin-top: 0.35rem;
+      accent-color: var(--accent-hook);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checklist-label {
+      font-size: 0.93rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .checklist-item.checked {
+      opacity: 0.6;
+      text-decoration: line-through;
+      border-color: rgba(34, 197, 94, 0.3);
+      background: rgba(34, 197, 94, 0.05);
+    }
+
+    /* ورقة العمل التفاعلية */
+    .worksheet-card {
+      background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(14, 23, 38, 0.7) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    [data-theme="light"] .worksheet-card {
+      background: #ffffff;
+      border-color: #cbd5e1;
+    }
+
+    .worksheet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .worksheet-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .worksheet-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .worksheet-label {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+
+    .worksheet-input, .worksheet-textarea {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .worksheet-input:focus, .worksheet-textarea:focus {
+      outline: none;
+      border-color: var(--accent-hook);
+      box-shadow: 0 0 10px var(--accent-hook-glow);
+    }
+
+    .worksheet-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* بنك الـ 30 بداية السريعة */
+    .starters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.5rem;
+    }
+
+    .starter-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .starter-card:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.03);
+      transform: translateY(-1px);
+    }
+
+    /* بطاقات برومبتات الذكاء الاصطناعي الحصرية */
+    .prompt-box {
+      background: var(--bg-card);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .prompt-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--accent-purple);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .prompt-content {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      direction: rtl;
+      text-align: right;
+    }
+
+    [data-theme="light"] .prompt-content {
+      background: #f8fafc;
+      color: #1e293b;
+      border-color: #cbd5e1;
+    }
+
+    /* صفحة المؤلف والغلاف الخلفي */
+    .author-back-cover {
+      background: linear-gradient(180deg, var(--bg-surface) 0%, #060b14 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      text-align: center;
+      box-shadow: var(--shadow-md), var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .author-back-cover {
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      color: #fff;
+    }
+
+    .author-banner-mini {
+      max-width: 500px;
+      width: 100%;
+      border-radius: var(--radius-md);
+      margin: 0 auto 2rem auto;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .author-name {
+      font-family: var(--font-heading);
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .author-tagline {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .author-bio-text {
+      max-width: 760px;
+      margin: 0 auto 2rem auto;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+
+    .community-pillars {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .pillar-badge {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pillar-badge span {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .contact-cta-box {
+      background: rgba(0, 240, 255, 0.06);
+      border: 1px solid rgba(0, 240, 255, 0.28);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #25D366;
+      color: #070d18;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 0.75rem 2rem;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+      transition: all 0.2s ease;
+      margin-top: 0.85rem;
+    }
+
+    .btn-whatsapp:hover {
+      background: #2ee272;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    }
+
+    /* زر العودة للأعلى والتنبيهات العائمة */
+    #back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--accent-cyan);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 800;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover {
+      background: var(--accent-cyan);
+      color: #070d18;
+      transform: translateY(-3px);
+    }
+
+    #toast-notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 50%;
+      transform: translateX(50%) translateY(100px);
+      background: #0f172a;
+      color: #fff;
+      border: 1px solid var(--accent-cyan);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 9999;
+    }
+
+    #toast-notification.show {
+      transform: translateX(50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* أنماط الطباعة والتصدير لـ PDF */
+    @media print {
+      @page {
+        size: A5 portrait;
+        margin: 15mm 12mm 15mm 12mm;
+        @bottom-center {
+          content: counter(page);
+          font-family: 'Cairo', sans-serif;
+          font-size: 8pt;
+          color: #666;
+        }
+      }
+
+      @page :first {
+        margin: 0;
+      }
+
+      body {
+        background: #fff !important;
+        color: #111 !important;
+        font-size: 10pt !important;
+        line-height: 1.6 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .top-nav, #reading-progress, .copy-btn, .btn-nav, .filter-sticky-bar, #back-to-top, #toast-notification {
+        display: none !important;
+      }
+
+      .booklet-container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .book-cover {
+        background: #0f172a !important;
+        color: #fff !important;
+        border: none !important;
+        box-shadow: none !important;
+        page-break-after: always;
+        break-after: page;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 30mm 15mm !important;
+      }
+
+      .category-card, .worksheet-card, .table-container, .dedication-card, .author-back-cover, .prompt-box, .rubric-calculator {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+      }
+
+      .page-break-print {
+        page-break-before: always;
+        break-before: page;
+      }
+
+      .category-card {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+      }
+
+      .category-heading, .section-title, .formula-title {
+        color: #0f172a !important;
+      }
+
+      .formula-strip {
+        background: #fff7ed !important;
+        border-color: #fdba74 !important;
+        color: #9a3412 !important;
+      }
+
+      .example-pill {
+        background: #f1f5f9 !important;
+        color: #1e293b !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- شريط تقدم القراءة -->
+  <div id="reading-progress"></div>
+
+  <!-- صندوق التنبيهات العائمة -->
+  <div id="toast-notification">
+    <span>⚡</span>
+    <span id="toast-msg">تم النسخ بنجاح!</span>
+  </div>
+
+  <!-- زر العودة للأعلى -->
+  <button id="back-to-top" title="العودة لأعلى الصفحة">↑</button>
+
+  <!-- شريط الأدوات العلوي للشاشات -->
+  <nav class="top-nav">
+    <div class="brand-mini">
+      <span class="brand-mini-badge">AI NAVIGATORS</span>
+      <span class="brand-mini-title">هندسة الهوك • Abo Aisel</span>
+    </div>
+    <div class="nav-actions">
+      <!-- تبديل الوضع الداكن/الفاتح -->
+      <button onclick="toggleTheme()" class="btn-nav" id="theme-toggle-btn" title="تبديل مظهر القراءة">
+        <span id="theme-icon">☀️</span> <span id="theme-text">فاتح</span>
+      </button>
+      <a href="#toc" class="btn-nav">
+        <span>📑</span> الفهرس
+      </a>
+      <a href="#ai-prompts" class="btn-nav" style="border-color: var(--accent-purple); color: var(--accent-purple);">
+        <span>🤖</span> برومبتات AI
+      </a>
+      <a href="#worksheet" class="btn-nav">
+        <span>✏️</span> ورقة العمل
+      </a>
+      <button onclick="window.print()" class="btn-nav btn-nav-primary">
+        <span>🖨️</span> حفظ PDF / طباعة
+      </button>
+    </div>
+  </nav>
+
+  <main class="booklet-container">
+
+    <!-- ==================== الغلاف الأمامي ==================== -->
+    <header class="book-cover">
+      <img src="banner.jpg" alt="AI Navigators - Abo Aisel" class="cover-banner-img">
+      <div class="cover-badge-top">دليل مرجعي تطبيقي • إصدار موسّع ومطور 2026</div>
+      <h1 class="cover-title">هندسة <span>الهوك</span></h1>
+      <p class="cover-subtitle">لصناعة المحتوى والتسويق الرقمي: معادلات قابلة للملء • أمثلة متعددة • تطبيقات حسب المنصة • اختبارات وتحسين • برومبتات الذكاء الاصطناعي</p>
+      
+      <div class="cover-stats-pill">
+        <span>⚡ <strong>16 فئة</strong> تصنيفية</span> •
+        <span>📐 أكثر من <strong>60 معادلة</strong></span> •
+        <span>💡 أكثر من <strong>120 مثالاً</strong> تطبيقياً</span> •
+        <span>🤖 <strong>5 برومبتات</strong> حصرية</span> •
+        <span>🎯 <strong>قمع تسويقي</strong> ومراحل وعي</span>
+      </div>
+
+      <div class="cover-meta">
+        <div class="cover-author">
+          <div class="cover-author-avatar">A</div>
+          <span>إعداد: Abo Aisel</span>
+        </div>
+        <div class="cover-edition">مجتمع AI Navigators • سبتمبر 2026</div>
+      </div>
+    </header>
+
+    <!-- ==================== شريط البحث والتصفية الحي ==================== -->
+    <div class="filter-sticky-bar">
+      <div class="search-input-wrapper">
+        <input type="text" id="hook-search" class="search-input" placeholder="ابحث في المعادلات، الفئات، الأمثلة (مثال: عيادة، ريلز، خصم، برومبت، فضول)...">
+        <span>🔍</span>
+      </div>
+      <div class="category-chips">
+        <button class="chip-btn active" onclick="filterCategory('all')">الكل (16)</button>
+        <button class="chip-btn" onclick="filterCategory('فضول')">الفضول</button>
+        <button class="chip-btn" onclick="filterCategory('مشكلة')">المشكلة والتحذير</button>
+        <button class="chip-btn" onclick="filterCategory('تحول')">النتيجة والتحول</button>
+        <button class="chip-btn" onclick="filterCategory('أرقام')">الأرقام والقوائم</button>
+        <button class="chip-btn" onclick="filterCategory('رأي')">الرأي المخالف</button>
+        <button class="chip-btn" onclick="filterCategory('قصة')">القصة والتجربة</button>
+        <button class="chip-btn" onclick="filterCategory('بيع')">العرض والبيع</button>
+        <button class="chip-btn" onclick="filterCategory('ذكاء')">الذكاء الاصطناعي</button>
+      </div>
+    </div>
+
+    <!-- ==================== صفحة الحقوق والبيانات ==================== -->
+    <section class="colophon-card">
+      <h2 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--text-main); margin-bottom: 0.5rem;">بطاقة الإصدار وحقوق الملكية الفكرية</h2>
+      <p style="font-size: 0.9rem; line-height: 1.6;">هذا الدليل أداة تحريرية استرشادية وتطبيقية موجّهة لصناع المحتوى، كتاب الإعلانات، رواد الأعمال، وفرق التسويق الرقمي لتطوير جودة الخطافات الإعلانية والمحتوى القائم على تسديد القيمة بصدق واحترافية.</p>
+      <div class="colophon-grid">
+        <div class="colophon-item">
+          <strong>اسم المصنّف:</strong>
+          هندسة الهوك لصناعة المحتوى والتسويق الرقمي
+        </div>
+        <div class="colophon-item">
+          <strong>إعداد وبحث:</strong>
+          Abo Aisel (مؤسس مجتمع AI Navigators)
+        </div>
+        <div class="colophon-item">
+          <strong>تاريخ الإصدار:</strong>
+          سبتمبر 2026 — النسخة الرقمية الموسعة 1.1
+        </div>
+        <div class="colophon-item">
+          <strong>الجهة والمجتمع:</strong>
+          AI Navigators (Guiding Intelligent Future & Community)
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== صفحة الإهداء ==================== -->
+    <section class="dedication-card">
+      <div class="dedication-icon">🧭</div>
+      <h3 class="dedication-title">إهداء وبوصلة</h3>
+      <p class="dedication-text">
+        «إلى كل صانع محتوى، مسوق، ومبتكر يسعى لاكتساب الانتباه الصادق وسط ضجيج الخوارزميات وصخب العصر الرقمي...<br>
+        إلى رفاق الدرب في مجتمع <strong>AI Navigators</strong> الذين يبحرون بوعي نحو مستقبل يصنعه الذكاء التوليدي وتثريه القيم الأصيلة...<br>
+        نُهديكم هذا الدليل ليكون بوصلتكم العملية في هندسة الكلمة الأولى، وصناعة الفارق من اللحظة الأولى.»
+      </p>
+      <div class="dedication-sign">— Abo Aisel</div>
+    </section>
+
+    <!-- ==================== الفهرس التفاعلي ==================== -->
+    <section id="toc" class="toc-card">
+      <h2 class="toc-title"><span>📑</span> فهرس محتويات الدليل</h2>
+      <div class="toc-grid">
+        <a href="#how-to-use" class="toc-link"><span>كيف تستخدم هذا الدليل والمعادلة الأم</span> <span class="toc-num">00</span></a>
+        <a href="#differences" class="toc-link"><span>الفرق بين الهوك والعنوان والوعد</span> <span class="toc-num">00</span></a>
+        <a href="#diagnosis" class="toc-link"><span>ورقة التشخيص ومثال العيادة</span> <span class="toc-num">00</span></a>
+        <a href="#cat-01" class="toc-link"><span>الفضول والفجوة المعرفية</span> <span class="toc-num">01</span></a>
+        <a href="#cat-02" class="toc-link"><span>المشكلة والخسارة والتحذير</span> <span class="toc-num">02</span></a>
+        <a href="#cat-03" class="toc-link"><span>النتيجة والتحول</span> <span class="toc-num">03</span></a>
+        <a href="#cat-04" class="toc-link"><span>الأرقام والقوائم</span> <span class="toc-num">04</span></a>
+        <a href="#cat-05" class="toc-link"><span>الرأي المخالف وكسر الاعتقاد</span> <span class="toc-num">05</span></a>
+        <a href="#cat-06" class="toc-link"><span>السؤال والتشخيص</span> <span class="toc-num">06</span></a>
+        <a href="#cat-07" class="toc-link"><span>القصة والتجربة</span> <span class="toc-num">07</span></a>
+        <a href="#cat-08" class="toc-link"><span>السلطة والخبرة والدليل</span> <span class="toc-num">08</span></a>
+        <a href="#cat-09" class="toc-link"><span>الإثبات الاجتماعي ودراسة الحالة</span> <span class="toc-num">09</span></a>
+        <a href="#cat-10" class="toc-link"><span>المقارنة والاختيار</span> <span class="toc-num">10</span></a>
+        <a href="#cat-11" class="toc-link"><span>السرعة والسهولة</span> <span class="toc-num">11</span></a>
+        <a href="#cat-12" class="toc-link"><span>الهوية والانتماء</span> <span class="toc-num">12</span></a>
+        <a href="#cat-13" class="toc-link"><span>العرض والبيع والتحويل</span> <span class="toc-num">13</span></a>
+        <a href="#cat-14" class="toc-link"><span>التوقيت والموسمية</span> <span class="toc-num">14</span></a>
+        <a href="#cat-15" class="toc-link"><span>المشاركة والتفاعل</span> <span class="toc-num">15</span></a>
+        <a href="#cat-16" class="toc-link"><span>الأداة والذكاء الاصطناعي</span> <span class="toc-num">16</span></a>
+        <a href="#platforms" class="toc-link"><span>تكييف الهوك حسب المنصة</span> <span class="toc-num">P</span></a>
+        <a href="#funnel" class="toc-link"><span>القمع التسويقي ومراحل الوعي</span> <span class="toc-num">F</span></a>
+        <a href="#refinement" class="toc-link"><span>التحسين: من عام إلى محدد والأخطاء</span> <span class="toc-num">R</span></a>
+        <a href="#ideation-testing" class="toc-link"><span>نظام 10 هوكات واختبار A/B</span> <span class="toc-num">T</span></a>
+        <a href="#checklist" class="toc-link"><span>قائمة المراجعة وحاسبة التقييم</span> <span class="toc-num">C</span></a>
+        <a href="#ai-prompts" class="toc-link" style="color: var(--accent-purple); font-weight: 700;"><span>ملحق: 5 برومبتات AI للملاحين</span> <span class="toc-num">AI</span></a>
+        <a href="#worksheet" class="toc-link"><span>ورقة العمل القابلة للنسخ والملء</span> <span class="toc-num">W</span></a>
+        <a href="#starters-bank" class="toc-link"><span>بنك سريع: 30 بداية جاهزة</span> <span class="toc-num">B</span></a>
+        <a href="#author-bio" class="toc-link"><span>نبذة المؤلف ومجتمع AI Navigators</span> <span class="toc-num">A</span></a>
+      </div>
+    </section>
+
+    <!-- ==================== المدخل المنهجي ==================== -->
+    <section id="how-to-use" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>🚀</span> كيف تستخدم هذا الدليل؟</h2>
+        <span class="section-badge">METHODOLOGY</span>
+      </div>
+      <p style="margin-bottom: 1rem; color: var(--text-muted);">
+        الهوك هو أول عنصر يواجه الجمهور: أول جملة، أول لقطة، عنوان الإعلان، موضوع البريد، أو العنوان الرئيسي في صفحة الهبوط. 
+        <strong>وظيفته ليست أن يبيع كل شيء</strong>؛ بل أن يكسب الخطوة التالية من الانتباه بطريقة صادقة وموثوقة.
+      </p>
+
+      <div class="callout-box">
+        <div class="callout-title"><span>📌</span> خطوات استخدام الدليل في عملك اليومي:</div>
+        <ol style="padding-right: 1.5rem; line-height: 1.9; color: var(--text-main);">
+          <li>حدد شخصًا واحدًا تريد جذبه في هذه القطعة بدقة.</li>
+          <li>اختر هدفًا واحدًا: مشاهدة، قراءة، حفظ، نقرة، رسالة، تسجيل، أو شراء.</li>
+          <li>استخرج مشكلة أو رغبة أو اعتراضًا حقيقيًا من لغة الجمهور ذاته.</li>
+          <li>اختر فئة هوك تناسب الهدف من الفئات الـ 16، ثم املأ المعادلة.</li>
+          <li>اكتب ثلاثة بدائل على الأقل، واقرأها بصوت مسموع للتأكد من انسيابيتها.</li>
+          <li>طابق الوعد مع بقية المحتوى، ثم اختبر النتيجة بالأرقام ومؤشرات الأداء.</li>
+        </ol>
+      </div>
+
+      <div class="callout-box callout-gold">
+        <div class="callout-title"><span>⚡</span> المعادلة الأم (The Master Hook Formula)</div>
+        <p style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--accent-gold); font-weight: 700;">
+          جمهور محدد + موقف أو مشكلة محسوسة + فجوة اهتمام + فائدة واضحة + وعد يمكن الوفاء به.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== الفرق بين الهوك والعنوان والوعد ==================== -->
+    <section id="differences" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>⚖️</span> الفرق بين الهوك والعنوان والوعد والـ CTA</h2>
+        <span class="section-badge">DISTINCTION</span>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>العنصر</th>
+              <th>وظيفته المحددة</th>
+              <th>مثال تطبيقي حي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color: var(--accent-hook);">الهوك (Hook)</strong></td>
+              <td>يجذب الخطوة التالية من الانتباه ويكسر التمرير (Scroll-Stopping).</td>
+              <td>إعلانك يحقق نقرات… فلماذا لا يبيع؟</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--accent-cyan);">الوعد (Promise)</strong></td>
+              <td>يحدد القيمة الحقيقية التي سيحصل عليها الجمهور داخل المحتوى.</td>
+              <td>ستتعلم تشخيص الفجوة بين الإعلان وصفحة البيع.</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--accent-gold);">الدليل (Proof)</strong></td>
+              <td>يجعل الوعد قابلاً للتصديق ويزيل الشكوك والتردد.</td>
+              <td>سنراجع 3 مؤشرات من حملة تسويقية حقيقية.</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--accent-green);">الدعوة للفعل (CTA)</strong></td>
+              <td>تطلب الخطوة التالية المحددة بوضوح وسهولة.</td>
+              <td>حمّل قائمة الفحص وراجع حملتك الإعلانية الآن.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== ورقة التشخيص السريع ومثال العيادة ==================== -->
+    <section id="diagnosis" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>🩺</span> قبل كتابة الهوك: ورقة التشخيص السريع</h2>
+        <span class="section-badge">DIAGNOSIS</span>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%;">عنصر التشخيص</th>
+              <th>السؤال الإرشادي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>الجمهور:</strong></td>
+              <td>من الشخص المقصود تحديدًا؟ وما المرحلة التي يمر بها؟</td>
+            </tr>
+            <tr>
+              <td><strong>الموقف:</strong></td>
+              <td>متى يشعر بالمشكلة أو الرغبة؟ (لحظة التوتر).</td>
+            </tr>
+            <tr>
+              <td><strong>اللغة:</strong></td>
+              <td>ما الكلمات والتعبيرات التي يستخدمها هو لوصف معاناته؟</td>
+            </tr>
+            <tr>
+              <td><strong>الهدف:</strong></td>
+              <td>ما الفعل الذي نريده منه بعد استهلاك هذا المحتوى؟</td>
+            </tr>
+            <tr>
+              <td><strong>القيمة:</strong></td>
+              <td>ما المعرفة أو الأداة أو القرار العملي الذي سيخرج به؟</td>
+            </tr>
+            <tr>
+              <td><strong>الدليل:</strong></td>
+              <td>ما المثال أو الرقم أو التجربة أو البرهان الذي سنقدمه؟</td>
+            </tr>
+            <tr>
+              <td><strong>القيد:</strong></td>
+              <td>ما الذي لا ينبغي أن نَعِد به أو نبالغ فيه لتجنب خيبة الأمل؟</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box callout-cyan">
+        <div class="callout-title"><span>🏥</span> مثال مكتمل: خدمة تسويق لعيادة طبية</div>
+        <ul style="padding-right: 1.5rem; line-height: 1.8; color: var(--text-main); list-style-type: square;">
+          <li><strong>الجمهور:</strong> مدير عيادة تصلها استفسارات كثيرة ولا تتحول إلى حجوزات فعلية.</li>
+          <li><strong>الموقف:</strong> يراجع تقرير الحملة ويرى رسائل كثيرة لكن جدول الحجوزات اليومي شبه فارغ.</li>
+          <li><strong>الهدف:</strong> حجز جلسة تشخيص مجانية لمسار المتابعة مع فريق الاستقبال.</li>
+          <li><strong style="color: var(--accent-hook);">الهوك المصاغ:</strong> «إعلان العيادة يجلب رسائل ولا يجلب حجوزات؟ المشكلة غالبًا تبدأ بعد وصول الرسالة.»</li>
+          <li><strong>الدليل داخل المحتوى:</strong> مقارنة زمن الرد، نص أول رسالة، ونسبة الانتقال من الاستفسار إلى الموعد.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==================== فئات الهوك الـ 16 ==================== -->
+    <div class="page-break-print"></div>
+    <div class="section-header" style="margin-top: 3rem;">
+      <h2 class="section-title"><span>📚</span> المكتبة الكبرى: 16 فئة لهندسة الهوك</h2>
+      <span class="section-badge">60+ FORMULAS</span>
+    </div>
+
+    <!-- الفئة 01 -->
+    <article id="cat-01" class="category-card" data-tags="فضول معرفة كشف سر">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 01</span>
+          <h3 class="category-heading">الفضول والفجوة المعرفية</h3>
+        </div>
+      </div>
+      <p class="category-description">اجذب الانتباه بإظهار جزء ناقص من الصورة يثير التساؤل، ثم اسدد الفضول داخل المحتوى دون مماطلة أو تضليل رخيص.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. ما لا يخبرك به أحد</div>
+        <div class="formula-strip">
+          <span>ما لا يخبرك به أحد عن [الموضوع] هو [التلميح]…</span>
+          <button class="copy-btn" onclick="copyHook('ما لا يخبرك به أحد عن [الموضوع] هو [التلميح]…')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            ما لا يخبرك به أحد عن إعلانات الرسائل: الإعلان قد ينجح، لكن المحادثة نفسها هي التي تُضيّع البيع.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            ما لا يخبرك به أحد عن كتابة الريلز: الفكرة البسيطة قد تتفوق على المونتاج المبالغ فيه.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. الجزء المفقود</div>
+        <div class="formula-strip">
+          <span>إذا كنت تفعل [السلوك] ولا تحصل على [النتيجة]، فغالبًا ينقصك [العنصر].</span>
+          <button class="copy-btn" onclick="copyHook('إذا كنت تفعل [السلوك] ولا تحصل على [النتيجة]، فغالبًا ينقصك [العنصر].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            إذا كنت تنشر يوميًا ولا تحصل على عملاء، فغالبًا ينقصك عرض واضح لا محتوى أكثر.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            إذا كانت زيارات صفحة الهبوط مرتفعة والمبيعات ضعيفة، فغالبًا ينقصها دليل ثقة واضح.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. الوعد بالكشف</div>
+        <div class="formula-strip">
+          <span>في نهاية هذا [الفيديو/المنشور] ستعرف لماذا [النتيجة الغريبة].</span>
+          <button class="copy-btn" onclick="copyHook('في نهاية هذا [الفيديو/المنشور] ستعرف لماذا [النتيجة الغريبة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            في نهاية الفيديو ستعرف لماذا إعلانك الأعلى مشاهدة قد يكون الأقل مبيعًا.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            في نهاية المنشور ستعرف لماذا يتذكر الناس قصتك وينسون اسم خدمتك.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. المعلومة غير المتوقعة</div>
+        <div class="formula-strip">
+          <span>[حقيقة غير متوقعة]، والسبب ليس ما تتخيله.</span>
+          <button class="copy-btn" onclick="copyHook('[حقيقة غير متوقعة]، والسبب ليس ما تتخيله.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            أكثر منشور جلب لنا استفسارات لم يكن منشورًا بيعيًا، والسبب ليس ما تتخيله.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            انخفاض تكلفة النقرة لا يعني أن الحملة تحسنت، والسبب في جودة الزيارات.
+          </div>
+        </div>
+      </div>
+
+      <div class="category-audit-footer">
+        <span>🔍 مراجعة الفئة:</span> هل الوعد مفهوم وموجز؟ هل يوجد ما يثبت الفكرة داخل المحتوى فعلاً؟
+      </div>
+    </article>
+
+    <!-- الفئة 02 -->
+    <article id="cat-02" class="category-card" data-tags="مشكلة خسارة تحذير خطأ خطر">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 02</span>
+          <h3 class="category-heading">المشكلة والخسارة والتحذير</h3>
+        </div>
+      </div>
+      <p class="category-description">اجعل الجمهور يرى بوضوح تكلفة الاستمرار في الخطأ، مع تقديم بديل عملي قابل للتطبيق فوراً وتجنب التخويف الفارغ.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. خطأ يكلّفك</div>
+        <div class="formula-strip">
+          <span>هذا الخطأ في [النشاط] يكلّفك [خسارة] كل [فترة].</span>
+          <button class="copy-btn" onclick="copyHook('هذا الخطأ في [النشاط] يكلّفك [خسارة] كل [فترة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            هذا الخطأ في متابعة العملاء المحتملين يكلّفك مبيعات كل أسبوع.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            هذا الخطأ في عنوان البريد يجعل عرضك الجيد غير مرئي للمشتركين.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. توقف عن</div>
+        <div class="formula-strip">
+          <span>توقف عن [السلوك] إذا كان هدفك [النتيجة].</span>
+          <button class="copy-btn" onclick="copyHook('توقف عن [السلوك] إذا كان هدفك [النتيجة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            توقف عن استهداف الجميع إذا كان هدفك خفض تكلفة اكتساب العميل.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            توقف عن بدء كل ريل بسيرة ذاتية إذا كان هدفك الاحتفاظ بالمشاهد.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. قبل أن تدفع</div>
+        <div class="formula-strip">
+          <span>قبل أن تدفع في [أداة/حملة]، تحقق من هذه [النقطة].</span>
+          <button class="copy-btn" onclick="copyHook('قبل أن تدفع في [أداة/حملة]، تحقق من هذه [النقطة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            قبل أن تدفع في حملة زيارات، تحقق أن الصفحة تقيس التحويل بدقة فعلًا.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            قبل أن تشترك في أداة جدولة، احسب الوقت الذي ستوفره لا عدد مزاياها.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. علامة خطر</div>
+        <div class="formula-strip">
+          <span>إذا رأيت [المؤشر]، فلا تتجاهله؛ غالبًا يعني [المشكلة].</span>
+          <button class="copy-btn" onclick="copyHook('إذا رأيت [المؤشر]، فلا تتجاهله؛ غالبًا يعني [المشكلة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            إذا زادت النقرات وبقيت الطلبات ثابتة، فلا تحتفل؛ غالبًا جودة الجمهور تراجعت.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            إذا كان الناس يحفظون المنشور ولا يزورون الرابط، فالدعوة للفعل قد تكون منفصلة عن الفائدة.
+          </div>
+        </div>
+      </div>
+
+      <div class="category-audit-footer">
+        <span>🔍 مراجعة الفئة:</span> هل المشكلة حقيقية يشعر بها الجمهور؟ وهل قدمت مخرجاً وعلاجاً واضحاً؟
+      </div>
+    </article>
+
+    <!-- الفئة 03 -->
+    <article id="cat-03" class="category-card" data-tags="نتيجة تحول أثر تغيير">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 03</span>
+          <h3 class="category-heading">النتيجة والتحول</h3>
+        </div>
+      </div>
+      <p class="category-description">قدّم نتيجة محددة ومرغوبة بشدة، واربطها بآلية عمل منطقية أو بمدة زمنية واقعية وقابلة للتصديق.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. من إلى</div>
+        <div class="formula-strip">
+          <span>كيف انتقلنا من [الوضع] إلى [النتيجة] باستخدام [الآلية].</span>
+          <button class="copy-btn" onclick="copyHook('كيف انتقلنا من [الوضع] إلى [النتيجة] باستخدام [الآلية].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            كيف انتقلنا من محتوى متقطع إلى تقويم 30 يومًا باستخدام أربعة أعمدة محتوى.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            كيف انتقلت صفحة عيادة من استفسارات عامة إلى حجوزات أوضح باستخدام رسائل متابعة قصيرة.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. نتيجة دون ألم</div>
+        <div class="formula-strip">
+          <span>كيف تحقق [النتيجة] دون [العقبة المكروهة].</span>
+          <button class="copy-btn" onclick="copyHook('كيف تحقق [النتيجة] دون [العقبة المكروهة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            كيف تبني أسبوع محتوى دون تصوير سبعة فيديوهات مختلفة.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            كيف تختبر عرضك دون حرق ميزانية شهر كامل.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. خطة زمنية</div>
+        <div class="formula-strip">
+          <span>خطة [مدة] للوصول إلى [النتيجة] إذا كنت [الجمهور].</span>
+          <button class="copy-btn" onclick="copyHook('خطة [مدة] للوصول إلى [النتيجة] إذا كنت [الجمهور].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            خطة 14 يومًا لبناء حضور لينكدإن إذا كنت تبدأ من الصفر.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            خطة أسبوع لتجهيز إطلاق منتج رقمي دون الحاجة لفريق كبير.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. قبل وبعد</div>
+        <div class="formula-strip">
+          <span>قبل [التغيير] كنا [المشكلة]؛ بعده أصبحنا [النتيجة].</span>
+          <button class="copy-btn" onclick="copyHook('قبل [التغيير] كنا [المشكلة]؛ بعده أصبحنا [النتيجة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            قبل توحيد الرسالة كانت الإعلانات تتحدث بثلاث لغات؛ بعدها عرف العميل فورًا لماذا يختارنا.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            قبل تقسيم البريد كانت الرسالة واحدة للجميع؛ بعده ارتفع التفاعل لأن كل شريحة رأت ما يخصها.
+          </div>
+        </div>
+      </div>
+
+      <div class="category-audit-footer">
+        <span>🔍 مراجعة الفئة:</span> هل التحول مدعوم بآلية قابلة للتنفيذ أم أنه مجرد وعود سحرية؟
+      </div>
+    </article>
+
+    <!-- الفئة 04 -->
+    <article id="cat-04" class="category-card" data-tags="أرقام قوائم خطوات ترتيب">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 04</span>
+          <h3 class="category-heading">الأرقام والقوائم</h3>
+        </div>
+      </div>
+      <p class="category-description">الأرقام تعد القارئ بوجبة معرفية مقدرة بوضوح وتقلل الغموض المعرفي، بشرط أن تكون القائمة ذات قيمة دسمة وليست حشواً مكرراً.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. أشياء يجب معرفتها</div>
+        <div class="formula-strip">
+          <span>[عدد] أشياء يجب أن تعرفها قبل [القرار].</span>
+          <button class="copy-btn" onclick="copyHook('[عدد] أشياء يجب أن تعرفها قبل [القرار].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            7 أشياء يجب أن تعرفها قبل توظيف صانع محتوى في شركتك.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            5 أشياء يجب أن تعرفها قبل إطلاق متجر إلكتروني لبيع المنتجات الرقمية.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. أسباب الفشل</div>
+        <div class="formula-strip">
+          <span>[عدد] أسباب تجعل [النتيجة السلبية] رغم [المجهود].</span>
+          <button class="copy-btn" onclick="copyHook('[عدد] أسباب تجعل [النتيجة السلبية] رغم [المجهود].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            4 أسباب تجعل إعلانك لا يبيع رغم التصميم والمونتاج الممتاز.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            3 أسباب تجعل الناس تخرج من صفحة الهبوط قبل ملء النموذج.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. خطوات عملية</div>
+        <div class="formula-strip">
+          <span>[عدد] خطوات لتحويل [المدخل] إلى [المخرج].</span>
+          <button class="copy-btn" onclick="copyHook('[عدد] خطوات لتحويل [المدخل] إلى [المخرج].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            5 خطوات لتحويل شهادة عميل إلى حملة محتوى كاملة متعددة المنصات.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            3 خطوات لتحويل سؤال متكرر من المتابعين إلى ريل تعليمي فيروسي.
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. ترتيب الخيارات</div>
+        <div class="formula-strip">
+          <span>رتّبت [الخيارات] من [المعيار الأدنى] إلى [الأعلى].</span>
+          <button class="copy-btn" onclick="copyHook('رتّبت [الخيارات] من [المعيار الأدنى] إلى [الأعلى].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill">
+            <span class="example-pill-label">التسويق الرقمي:</span>
+            رتبت أفكار المحتوى من الأسرع إنتاجًا إلى الأقوى في بناء الثقة والمبيعات.
+          </div>
+          <div class="example-pill content">
+            <span class="example-pill-label">صناعة المحتوى:</span>
+            رتبت قنوات اكتساب العملاء من الأسرع اختبارًا إلى الأطول أثرًا واستدامة.
+          </div>
+        </div>
+      </div>
+
+      <div class="category-audit-footer">
+        <span>🔍 مراجعة الفئة:</span> هل الرقم دقيق؟ وهل كل بند في القائمة يقدم خطوة فعلية جديدة؟
+      </div>
+    </article>
+
+    <!-- الفئة 05 -->
+    <article id="cat-05" class="category-card" data-tags="رأي خرافة اعتقاد مخالف">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 05</span>
+          <h3 class="category-heading">الرأي المخالف وكسر الاعتقاد</h3>
+        </div>
+      </div>
+      <p class="category-description">استخدم هذه الفئة عندما تملك حجة منطقية قوية وتجربة واقعية مثبتة، وتجنب إثارة الجدل العقيم لمجرد إحداث صخب.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. الرأي غير الشائع</div>
+        <div class="formula-strip">
+          <span>رأي غير شائع: [الرأي] لأن [السبب].</span>
+          <button class="copy-btn" onclick="copyHook('رأي غير شائع: [الرأي] لأن [السبب].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> رأي غير شائع: زيادة وتيرة النشر ليست حلًا إذا كانت الرسالة نفسها غير واضحة.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> رأي غير شائع: الإعلان الأفضل ليس دائمًا الأجمل تصميمياً؛ بل الأسرع في إيصال العرض.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. أكبر خرافة</div>
+        <div class="formula-strip">
+          <span>أكبر خرافة في [المجال] هي [الاعتقاد].</span>
+          <button class="copy-btn" onclick="copyHook('أكبر خرافة في [المجال] هي [الاعتقاد].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> أكبر خرافة في صناعة المحتوى هي أن كل منشور يجب أن يكون فكرة جديدة تمامًا.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> أكبر خرافة في الإعلانات هي أن الاستهداف الدقيق وحده يصلح عرضًا تجارياً ضعيفًا.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. ليس كما تظن</div>
+        <div class="formula-strip">
+          <span>[المفهوم] ليس [الاعتقاد الشائع]؛ هو في الحقيقة [التعريف الأدق].</span>
+          <button class="copy-btn" onclick="copyHook('[المفهوم] ليس [الاعتقاد الشائع]؛ هو في الحقيقة [التعريف الأدق].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> البراند الشخصي ليس الحديث عن نفسك طوال الوقت؛ هو بناء معنى ثابت حول خبرتك.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> إعادة الاستهداف ليست مطاردة الناس؛ هي استكمال رسالة بدأوا الاهتمام بها فعلاً.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. الأسهل ليس الأفضل</div>
+        <div class="formula-strip">
+          <span>[الحل الشائع] هو الأسهل، لكنه قد يسبب [الأثر السلبي].</span>
+          <button class="copy-btn" onclick="copyHook('[الحل الشائع] هو الأسهل، لكنه قد يسبب [الأثر السلبي].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> شراء المتابعين هو الأسهل، لكنه يفسد خوارزميات الحساب وقراءة التفاعل الحقيقي.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> نسخ منافسك هو الأسهل، لكنه يجعلك بديلًا رخيصاً بلا سبب حقيقي للاختيار.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل تملك دليلاً أو حجة تدعم هذا الرأي المخالف؟</div>
+    </article>
+
+    <!-- الفئة 06 -->
+    <article id="cat-06" class="category-card" data-tags="سؤال تشخيص اختبار فحص">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 06</span>
+          <h3 class="category-heading">السؤال والتشخيص</h3>
+        </div>
+      </div>
+      <p class="category-description">حوّل الهوك إلى مرآة سيكولوجية يرى فيها القارئ واقعه فوراً أو يتعرف على أعراض مشكلة تؤرقه يومياً.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. هل تعاني؟</div>
+        <div class="formula-strip">
+          <span>هل [العرض] يحدث معك؟ غالبًا السبب [تلميح].</span>
+          <button class="copy-btn" onclick="copyHook('هل [العرض] يحدث معك؟ غالبًا السبب [تلميح].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> هل تأتيك رسائل كثيرة ولا تتحول إلى حجوزات؟ غالبًا المشكلة بعد الإعلان لا داخله.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> هل تبدأ كتابة المنشور ثم تحذفه مراراً؟ غالبًا تحاول قول أكثر من فكرة في سياق واحد.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. لماذا رغم؟</div>
+        <div class="formula-strip">
+          <span>لماذا [المشكلة] رغم أنك [السلوك الإيجابي]؟</span>
+          <button class="copy-btn" onclick="copyHook('لماذا [المشكلة] رغم أنك [السلوك الإيجابي]؟')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> لماذا لا يتذكر الناس علامتك التجارية رغم أن تصميماتك متناسقة واحترافية؟</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> لماذا لا تنخفض تكلفة اكتساب العميل رغم تحسن معدل النقر على الإعلان (CTR)؟</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. اختبار سريع</div>
+        <div class="formula-strip">
+          <span>اختبار من [مدة/أسئلة] يكشف هل [الحالة].</span>
+          <button class="copy-btn" onclick="copyHook('اختبار من [مدة/أسئلة] يكشف هل [الحالة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> اختبار من ثلاثة أسئلة يكشف هل عرضك البيعي واضح أم يحتاج إعادة صياغة جذرية.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> اختبار الـ 20 ثانية يكشف فوراً إن كانت مقدمة الريل بطيئة ومملة للمشاهد.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. أي نوع أنت؟</div>
+        <div class="formula-strip">
+          <span>أي نوع من [الفئة] أنت: [أ] أم [ب] أم [ج]؟</span>
+          <button class="copy-btn" onclick="copyHook('أي نوع من [الفئة] أنت: [أ] أم [ب] أم [ج]؟')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> أي نوع من صناع المحتوى أنت: المعلم المرشد أم الراوي الملهم أم المحلل الدقيق؟</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> أي نوع من الحملات يحتاجه مشروعك الآن: اكتساب أم إعادة استهداف أم تنشيط ولاء؟</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل السؤال يدفع القارئ للإجابة الذهنية الفورية؟</div>
+    </article>
+
+    <!-- الفئة 07 -->
+    <article id="cat-07" class="category-card" data-tags="قصة تجربة موقف درس">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 07</span>
+          <h3 class="category-heading">القصة والتجربة</h3>
+        </div>
+      </div>
+      <p class="category-description">ابدأ مباشرة من لحظة توتر أو قرار مصيري أو نتيجة صادمة، وتجنب المقدمات الزمنية الطويلة والتفاصيل غير المؤثرة.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. تعلمت بصعوبة</div>
+        <div class="formula-strip">
+          <span>استغرق مني [المدة] لأفهم أن [الدرس المستفاد].</span>
+          <button class="copy-btn" onclick="copyHook('استغرق مني [المدة] لأفهم أن [الدرس المستفاد].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> استغرق مني عشرات المنشورات لأفهم أن الوضوح المباشر يتفوق دائماً على الذكاء اللفظي.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> استغرق منا ثلاث حملات فاشلة لأفهم أن الخصم المالي لا يعوض غياب الثقة في العلامة.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. لحظة التغيير</div>
+        <div class="formula-strip">
+          <span>في يوم [الموقف]، تغيّر فهمي لـ[الموضوع].</span>
+          <button class="copy-btn" onclick="copyHook('في يوم [الموقف]، تغيّر فهمي لـ[الموضوع].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> في يوم سألني عميل: «ما الذي سأحصل عليه بالضبط غداً؟» تغيّر فهمي لكتابة العروض.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> عندما فشل أجمل إعلان صممناه في جلب مبيعات، تغيّر فهمي لدور التصميم الفني.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. كنا على وشك</div>
+        <div class="formula-strip">
+          <span>كنا على وشك [الخسارة]، ثم اكتشفنا [العامل الحاسم].</span>
+          <button class="copy-btn" onclick="copyHook('كنا على وشك [الخسارة]، ثم اكتشفنا [العامل الحاسم].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> كنا على وشك إيقاف الحملة نهائياً، ثم اكتشفنا أن نموذج الطلب لا يعمل على هواتف الآيفون.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> كنا على وشك تغيير فكرة المنتج بالكامل، ثم اكتشفنا أن الناس ببساطة لا تفهم طريقة استخدامه.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. لو بدأت من جديد</div>
+        <div class="formula-strip">
+          <span>لو بدأت [المجال] من جديد، سأفعل [الاختيار الذكي] أولًا.</span>
+          <button class="copy-btn" onclick="copyHook('لو بدأت [المجال] من جديد، سأفعل [الاختيار الذكي] أولًا.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> لو بدأت صناعة المحتوى من جديد، سأجمع أسئلة العملاء الحقيقية قبل شراء معدات التصوير.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> لو بدأت التسويق لمتجر من جديد، سأضبط أدوات التتبع والقياس قبل زيادة الميزانية.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل القصة تخدم فكرة الدرس أم أنها مجرد استعراض ذاتي؟</div>
+    </article>
+
+    <!-- الفئة 08 -->
+    <article id="cat-08" class="category-card" data-tags="سلطة خبرة دليل واقع نصيحة">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 08</span>
+          <h3 class="category-heading">السلطة والخبرة والدليل</h3>
+        </div>
+      </div>
+      <p class="category-description">استخدم رصيد الخبرة الميدانية لإسناد الفكرة وتأكيد مصداقيتها، دون الوقوع في فخ التعالي أو التباهي الشخصي.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. بعد سنوات</div>
+        <div class="formula-strip">
+          <span>بعد [عدد] سنوات في [المجال]، هذه قاعدة لا أتجاوزها أبدًا.</span>
+          <button class="copy-btn" onclick="copyHook('بعد [عدد] سنوات في [المجال]، هذه قاعدة لا أتجاوزها أبدًا.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> بعد 10 سنوات في التسويق، لا أطلق أي حملة بلا تعريف رقمي دقيق وصارم للتحويل.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> بعد مئات السكريبتات الإعلانية، لا أسمح أبدًا للمقدمة والترحيب أن تسبق طرح المشكلة.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. ما أنصح به</div>
+        <div class="formula-strip">
+          <span>هذا ما أنصح به [الفئة] عندما يريدون [النتيجة المحددة].</span>
+          <button class="copy-btn" onclick="copyHook('هذا ما أنصح به [الفئة] عندما يريدون [النتيجة المحددة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> هذا ما أنصح به أصحاب العيادات الطبية عندما يريدون حجوزات فعلية لا مجرد تفاعل وهمي.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> هذا ما أنصح به المدربين والخبراء عندما يريدون تحويل معرفتهم إلى منتج رقمي يباع ذاتياً.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. دليل من الواقع</div>
+        <div class="formula-strip">
+          <span>حلّلنا [عدد/نوع البيانات] ووجدنا أن [الملاحظة الحاسمة].</span>
+          <button class="copy-btn" onclick="copyHook('حلّلنا [عدد/نوع البيانات] ووجدنا أن [الملاحظة الحاسمة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> حللنا أكثر من 500 منشور عالي الحفظ فوجدنا أن الأمثلة الملموسة سبقت النصائح النظرية.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> راجعنا 100 مكالمة مبيعات مسجلة فوجدنا أن نفس الاعتراض يتكرر دائماً بصيغ مختلفة.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. ما لا أفعله</div>
+        <div class="formula-strip">
+          <span>[عدد] أشياء لا أفعلها أبدًا عندما [المهمة].</span>
+          <button class="copy-btn" onclick="copyHook('[عدد] أشياء لا أفعلها أبدًا عندما [المهمة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> 4 أشياء لا أفعلها أبدًا عند كتابة إعلان طبي يخاطب آلام المرضى.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> 3 أشياء لا أفعلها أبدًا عند الحكم على نجاح حملة إعلانية في يومها الأول.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل تعزز هذه الصيغة الثقة المهنية لدى المتلقي؟</div>
+    </article>
+
+    <!-- الفئة 09 -->
+    <article id="cat-09" class="category-card" data-tags="إثبات اجتماعي عميل كواليس حالة">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 09</span>
+          <h3 class="category-heading">الإثبات الاجتماعي ودراسة الحالة</h3>
+        </div>
+      </div>
+      <p class="category-description">ابدأ بنتيجة رقمية ملموسة أو اقتباس واقعي لعميل، ثم اشرح السياق والمنهج والقيود بمصداقية وشفافية كاملة.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. عميل قال</div>
+        <div class="formula-strip">
+          <span>قال العميل: «[الاقتباس]»؛ وهذا ما غيّرناه فورًا.</span>
+          <button class="copy-btn" onclick="copyHook('قال العميل: «[الاقتباس]»؛ وهذا ما غيّرناه فورًا.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> قال العميل: «الناس تسأل عن السعر ثم تختفي تمامًا»؛ وهذا ما غيّرناه في رسالة المتابعة الأولى.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> قالت المتدربة: «لدي خبرة عميقة لكن لا أعرف ماذا أنشر»؛ فبنينا لها نظام أعمدة المحتوى.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. رقم قبل وبعد</div>
+        <div class="formula-strip">
+          <span>من [الرقم القديم] إلى [الرقم الجديد] بعد [التغيير البسيط].</span>
+          <button class="copy-btn" onclick="copyHook('من [الرقم القديم] إلى [الرقم الجديد] بعد [التغيير البسيط].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> من 18 خطوة في نموذج الحجز المعقد إلى 6 خطوات سهلة بعد تبسيط رحلة العميل.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> من رسالة عامة باردة إلى ثلاث رسائل مخصصة حسب نية العميل بعد تقسيم القائمة.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. لم يكن السبب</div>
+        <div class="formula-strip">
+          <span>حققنا [النتيجة]، لكن السبب لم يكن [التفسير المتوقع].</span>
+          <button class="copy-btn" onclick="copyHook('حققنا [النتيجة]، لكن السبب لم يكن [التفسير المتوقع].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> ضاعفنا الاستفسارات، لكن السبب لم يكن زيادة الميزانية؛ كان إعادة صياغة العرض بوضوح.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> تحسن معدل الاحتفاظ بالمشاهد في الريلز، لكن السبب لم يكن مونتاجًا أسرع بل حذف المقدمة.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. خلف الكواليس</div>
+        <div class="formula-strip">
+          <span>خلف كواليس [النتيجة]: ماذا فعلنا وماذا تجنبنا تمامًا.</span>
+          <button class="copy-btn" onclick="copyHook('خلف كواليس [النتيجة]: ماذا فعلنا وماذا تجنبنا تمامًا.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> خلف كواليس إطلاق دورة تعليمية: كيف اختبرنا ووضوح الوعد قبل تسجيل درس واحد.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> خلف كواليس بناء تقويم محتوى لشهر كامل: كيف خرج من تحليل 12 سؤالاً حقيقياً من العملاء.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل دراسة الحالة واقعية ومنطقية وقابلة للتكرار؟</div>
+    </article>
+
+    <!-- الفئة 10 -->
+    <article id="cat-10" class="category-card" data-tags="مقارنة اختيار قرار معيار">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 10</span>
+          <h3 class="category-heading">المقارنة والاختيار</h3>
+        </div>
+      </div>
+      <p class="category-description">المقارنة الاحترافية تحدد الجمهور المستهدف والمعيار الدقيق؛ ولا تعلن فائزاً مطلقاً دون شرح السياق العملي المناسب.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. أم؟</div>
+        <div class="formula-strip">
+          <span>[الخيار أ] أم [الخيار ب]؟ اختر بناءً على [المعيار المحدد].</span>
+          <button class="copy-btn" onclick="copyHook('[الخيار أ] أم [الخيار ب]؟ اختر بناءً على [المعيار المحدد].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> ريل أم كاروسيل؟ اختر بناءً على هل تبحث عن وصول سريع أم شرح تفصيلي قابل للحفظ.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> حملة رسائل أم نموذج تسجيل (Lead Form)؟ اختر بناءً على سرعة وجاهزية فريق المتابعة.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. قبل وبعد القرار</div>
+        <div class="formula-strip">
+          <span>جربنا [أ] ثم جربنا [ب]؛ هذا بالضبط ما تغيّر في الأرقام.</span>
+          <button class="copy-btn" onclick="copyHook('جربنا [أ] ثم جربنا [ب]؛ هذا بالضبط ما تغيّر في الأرقام.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> جربنا عنوانًا ذكياً واستعارياً ثم عنوانًا مباشراً وصريحاً؛ هذا ما حدث لمعدل الفتح.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> جربنا تقديم خصم مالي ثم جربنا تقديم ضمان استرداد قوي؛ هذا ما تغيّر في جودة الطلبات.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. لمن يصلح؟</div>
+        <div class="formula-strip">
+          <span>[الخيار] ممتاز إذا كنت [الحالة الأولى]، لكنه سيئ جدًا إذا [الحالة الثانية].</span>
+          <button class="copy-btn" onclick="copyHook('[الخيار] ممتاز إذا كنت [الحالة الأولى]، لكنه سيئ جدًا إذا [الحالة الثانية].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> المحتوى الطويل ممتاز لشرح قرار معقد، لكنه فاشل تماماً إذا أخفيت الفكرة في المقدمة.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> الخصم ممتاز لتسريع قرار شراء موجود مسبقاً، لكنه ضعيف جداً لصنع رغبة غير موجودة.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. جدول قرار</div>
+        <div class="formula-strip">
+          <span>إذا كان هدفك [أ] اختر [س]؛ وإذا كان هدفك [ب] اختر [ص].</span>
+          <button class="copy-btn" onclick="copyHook('إذا كان هدفك [أ] اختر [س]؛ وإذا كان هدفك [ب] اختر [ص].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> إذا كان هدفك الانتشار اختر فيديو قصير؛ وإذا كان بناء مرجع دائم اختر مقالاً أو كاروسيل.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> إذا كان هدفك إتمام الطلب الآن استخدم CTA مباشراً؛ وإذا كان بناء الثقة اطلب خطوة تفاعلية صغيرة.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل المعيار المقارن عادل ومفهوم ويساعد القارئ على اتخاذ قرار؟</div>
+    </article>
+
+    <!-- الفئة 11 -->
+    <article id="cat-11" class="category-card" data-tags="سرعة سهولة قالب دقائق اختصار">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 11</span>
+          <h3 class="category-heading">السرعة والسهولة</h3>
+        </div>
+      </div>
+      <p class="category-description">قدّم اختصاراً عملياً وملموساً للجهد والوقت، وتجنب الوعود الخيالية التي تفقدك المصداقية فوراً.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. في دقائق</div>
+        <div class="formula-strip">
+          <span>في [مدة]، حوّل [المدخل] إلى [المخرج القابل للاستخدام].</span>
+          <button class="copy-btn" onclick="copyHook('في [مدة]، حوّل [المدخل] إلى [المخرج القابل للاستخدام].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> في 15 دقيقة، حوّل تسجيل صوتي لمقابلة عميل إلى خمسة موضوعات محتوى متكاملة.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> في 10 دقائق، حوّل صفحة خدمة مبعثرة إلى عرض تسويقي محكم من سطر واحد.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. قالب جاهز</div>
+        <div class="formula-strip">
+          <span>انسخ هذا القالب البسيط لتحقيق [النتيجة].</span>
+          <button class="copy-btn" onclick="copyHook('انسخ هذا القالب البسيط لتحقيق [النتيجة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> انسخ هذا القالب لكتابة دعوة للعمل (CTA) واثقة لا تبدو متوسلة أو لحوحة.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> انسخ هذا القالب لتحويل أي ميزة تقنية في منتجك إلى فائدة ملموسة يفهمها العميل.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. بدون أداة</div>
+        <div class="formula-strip">
+          <span>طريقة [النتيجة المرغوبة] بدون [الأداة/التكلفة المرهقة].</span>
+          <button class="copy-btn" onclick="copyHook('طريقة [النتيجة المرغوبة] بدون [الأداة/التكلفة المرهقة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> طريقة جمع أفكار محتوى تكفيك شهراً كاملاً بدون دفع دولار واحد في أداة مدفوعة.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> طريقة اختبار ثلاثة عناوين إعلانية مختلفة بدون إعادة تصميم الفيديو من الصفر.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. أقل مجهود مكرر</div>
+        <div class="formula-strip">
+          <span>افعل [العمل] مرة واحدة، واستخرِج منه [عدد] أصول تسويقية.</span>
+          <button class="copy-btn" onclick="copyHook('افعل [العمل] مرة واحدة، واستخرِج منه [عدد] أصول تسويقية.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> صوّر لقاءً بودكاست واحد، واستخرج منه 8 ريلز و4 اقتباسات ومقالاً تفصيلياً.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> اكتب دراسة حالة واحدة متقنة، واستخرج منها إعلاناً، وبريداً، وصفحة إثبات لموقعك.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل القالب أو الاختصار جاهز للاستخدام الفوري فعلاً؟</div>
+    </article>
+
+    <!-- الفئة 12 -->
+    <article id="cat-12" class="category-card" data-tags="هوية انتماء محترف مستوى شريحة">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 12</span>
+          <h3 class="category-heading">الهوية والانتماء</h3>
+        </div>
+      </div>
+      <p class="category-description">خاطب طموح الجمهور المهني أو مرحلته الحالية، وتجنب الإقصاء المصطنع أو إطلاق الأحكام المتعالية.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. إذا كنت جادًا</div>
+        <div class="formula-strip">
+          <span>إذا كنت جادًا في [الهدف الكبير]، ابدأ بـ[الأساس الحقيقي].</span>
+          <button class="copy-btn" onclick="copyHook('إذا كنت جادًا في [الهدف الكبير]، ابدأ بـ[الأساس الحقيقي].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> إذا كنت جادًا في بناء علامة شخصية، ابدأ بتحديد رسالتك الواضحة لا بتصميم شعار.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> إذا كنت جادًا في خفض تكلفة العميل، ابدأ بقياس عائد الربح الصافي لا أرقام الإعجاب.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. لأصحاب</div>
+        <div class="formula-strip">
+          <span>هذا المحتوى لأصحاب [الصفة/المجال] الذين يريدون [التحول].</span>
+          <button class="copy-btn" onclick="copyHook('هذا المحتوى لأصحاب [الصفة/المجال] الذين يريدون [التحول].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> هذا المحتوى لأصحاب الخبرة الطويلة الذين يريدون تحويلها إلى استشارة قابلة للبيع.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> هذا الفيديو لمديري التسويق الذين يريدون تقديم تقرير أسبوعي يفهمه صانع القرار فوراً.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. أنت لا تحتاج</div>
+        <div class="formula-strip">
+          <span>أنت لا تحتاج [الرمز الشائع المرهق] لتصبح [الهوية المهنية].</span>
+          <button class="copy-btn" onclick="copyHook('أنت لا تحتاج [الرمز الشائع المرهق] لتصبح [الهوية المهنية].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> أنت لا تحتاج استوديو تصوير باهظ الثمن لتصبح صانع محتوى واضحاً ومؤثراً.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> أنت لا تحتاج ميزانية ضخمة لتصبح قراراتك التسويقية قائمة على بيانات واختبارات علمية.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. فرق المحترف</div>
+        <div class="formula-strip">
+          <span>الفرق بين [المبتدئ] و[المحترف] في [السلوك المعين].</span>
+          <button class="copy-btn" onclick="copyHook('الفرق بين [المبتدئ] و[المحترف] في [السلوك المعين].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> الفرق بين مجرد ناشر للمحتوى واستراتيجي محتوى محترف يكمن في سبب اختيار الفكرة.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> الفرق بين تقرير حملة عادي وتقرير إداري رفيع يكمن في القرار التجاري الذي يقترحه.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل يشعر القارئ المستهدف بأن هذا المحتوى كُتب خصيصاً له؟</div>
+    </article>
+
+    <!-- الفئة 13 -->
+    <article id="cat-13" class="category-card" data-tags="بيع عرض تحويل شراء اعتراض">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 13</span>
+          <h3 class="category-heading">العرض والبيع والتحويل</h3>
+        </div>
+      </div>
+      <p class="category-description">هوك البيع المباشر يبدأ دوماً من حاجة العميل أو اعتراضه الدفين، ثم يربطه بعرض واضح لا لبس فيه ودعوة محددة.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. لمن هذا العرض</div>
+        <div class="formula-strip">
+          <span>إذا كنت [الجمهور المحدد] وتريد [النتيجة]، صممنا [العرض] لك.</span>
+          <button class="copy-btn" onclick="copyHook('إذا كنت [الجمهور المحدد] وتريد [النتيجة]، صممنا [العرض] لك.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> إذا كنت مدرباً وتريد إنتاج موادك التعليمية باحترافية وأسرع، صممنا هذا النظام لك.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> إذا كنت صاحب عيادة وتريد متابعة منظمة ومؤتمتة لكل استفسار، صممنا هذه الخدمة لك.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. إزالة الاعتراض</div>
+        <div class="formula-strip">
+          <span>تعتقد أن [الاعتراض الشائع]؟ إليك ما يحدث فعليًا.</span>
+          <button class="copy-btn" onclick="copyHook('تعتقد أن [الاعتراض الشائع]؟ إليك ما يحدث فعليًا.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> تعتقد أن صناعة المحتوى تتطلب تفرغاً تاماً؟ إليك نظام الـ ساعتين أسبوعياً لإنتاج شهر.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> تعتقد أن الإعلانات الممولة لا تناسب نشاطك المحلي؟ إليك كيف نحدد نطاق الطلب الحقيقي.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. تكلفة عدم القرار</div>
+        <div class="formula-strip">
+          <span>كل أسبوع تؤجل فيه [القرار الضروري]، يستمر [الأثر السلبي].</span>
+          <button class="copy-btn" onclick="copyHook('كل أسبوع تؤجل فيه [القرار الضروري]، يستمر [الأثر السلبي].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> كل أسبوع تؤجل فيه ضبط متابعة العملاء، تبرد استفسارات دفعت أموالاً لجلبها.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> كل شهر يمر بدون بناء قائمة بريدية خاصة يجعلك تبدأ الوصول لجمهورك من الصفر مجدداً.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. دعوة محددة</div>
+        <div class="formula-strip">
+          <span>إذا أردت [النتيجة]، ابدأ بـ[خطوة واحدة محددة] الآن.</span>
+          <button class="copy-btn" onclick="copyHook('إذا أردت [النتيجة]، ابدأ بـ[خطوة واحدة محددة] الآن.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> إذا أردت تقييم قوة عرضك الحالي، اكتب وعده في سطر واحد وشاركه معنا الآن.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> إذا أردت تقليل هدر ميزانية إعلاناتك، راجع آخر 20 محادثة استفسار قبل زيادة الإنفاق.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل العرض واضح وسهل الفهم وخالٍ من الغموض والشروط الخفية؟</div>
+    </article>
+
+    <!-- الفئة 14 -->
+    <article id="cat-14" class="category-card" data-tags="توقيت موسم مناسبة حدث ندرة">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 14</span>
+          <h3 class="category-heading">التوقيت والموسمية</h3>
+        </div>
+      </div>
+      <p class="category-description">اربط رسالتك التسويقية بلحظة حقيقية يعيشها السوق أو يمر بها القارئ، وتجنب الندرة المصطنعة والتواريخ المفتعلة.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. قبل الموسم</div>
+        <div class="formula-strip">
+          <span>قبل [الموسم/المناسبة القادمة]، جهّز [العنصر الحاسم].</span>
+          <button class="copy-btn" onclick="copyHook('قبل [الموسم/المناسبة القادمة]، جهّز [العنصر الحاسم].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> قبل موسم العودة للمدارس، جهّز رسائل تسويقية منفصلة تماماً للأهل عن الطلاب.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> قبل شهر رمضان، حدد ما سيتغير في سلوك الشراء والمواعيد لا في ألوان التصاميم فقط.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. الآن هو الوقت</div>
+        <div class="formula-strip">
+          <span>إذا كنت تخطط لـ[الهدف]، فالآن هو وقت [الخطوة التأسيسية].</span>
+          <button class="copy-btn" onclick="copyHook('إذا كنت تخطط لـ[الهدف]، فالآن هو وقت [الخطوة التأسيسية].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> إذا كنت تخطط لإطلاق منتجك نهاية العام، فالآن هو وقت جمع وتغذية قائمة الانتظار.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> إذا كنت تخطط لحملة عيد الفطر، فالآن وقت اختبار زوايا العرض لا في ليلة الإطلاق.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. بعد الحدث</div>
+        <div class="formula-strip">
+          <span>انتهى [الحدث/الموسم]؛ إليك ما يجب قياسه قبل إطلاق الحملة التالية.</span>
+          <button class="copy-btn" onclick="copyHook('انتهى [الحدث/الموسم]؛ إليك ما يجب قياسه قبل إطلاق الحملة التالية.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> انتهى إطلاق الدفعة الأولى؛ إليك ما يجب قياسه رقمياً قبل فتح باب التسجيل مجدداً.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> انتهت مشاركتك في المعرض؛ إليك كيف تحوّل بطاقات العمل لرسائل متابعة دافئة.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. لحظة قرار</div>
+        <div class="formula-strip">
+          <span>عندما يحدث [الموقف المفاجئ]، لا تفعل [الخطأ]؛ افعل [البديل المدروس].</span>
+          <button class="copy-btn" onclick="copyHook('عندما يحدث [الموقف المفاجئ]، لا تفعل [الخطأ]؛ افعل [البديل المدروس].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> عندما يرتفع سعر الإعلانات في السوق، لا توقف كل شيء؛ افصل مشكلة المنصة عن جاذبية العرض.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> عندما يقل تفاعل منشوراتك فجأة، لا تغيّر هويتك؛ راجع استراتيجية توزيع المحتوى أولاً.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل التوقيت يمثل دافعاً حقيقياً في واقع الجمهور؟</div>
+    </article>
+
+    <!-- الفئة 15 -->
+    <article id="cat-15" class="category-card" data-tags="مشاركة تفاعل تعليق تصويت تقييم">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 15</span>
+          <h3 class="category-heading">المشاركة والتفاعل</h3>
+        </div>
+      </div>
+      <p class="category-description">اطلب استجابة حقيقية لها قيمة مضافة في صلب الموضوع، وابتعد عن طلب التعليقات الفارغة المصطنعة لرفع الأرقام الوهمية.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. اختر واحدًا</div>
+        <div class="formula-strip">
+          <span>لو ستختار واحدًا فقط لنجاح مشروعك: [أ] أم [ب]؟ ولماذا؟</span>
+          <button class="copy-btn" onclick="copyHook('لو ستختار واحدًا فقط لنجاح مشروعك: [أ] أم [ب]؟ ولماذا؟')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> لو ستختار واحداً فقط: الوصول الواسع لآلاف المشاهدات أم عدد أقل من العملاء عالي الجودة؟ ولماذا؟</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> لو ستختار واحداً: النشر اليومي بجودة مقبولة أم النشر الأسبوعي بجودة استثنائية؟</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. أكمل الجملة</div>
+        <div class="formula-strip">
+          <span>أكمل الجملة: أصعب شيء يواجهني في [الموضوع] هو ___.</span>
+          <button class="copy-btn" onclick="copyHook('أكمل الجملة: أصعب شيء يواجهني في [الموضوع] هو ___.')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> أكمل الجملة: أصعب شيء في الاستمرار بصناعة المحتوى التسويقي هو ___.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> أكمل الجملة: أول رقم أنظر إليه فور فتح تقرير الحملة الإعلانية هو ___.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. قيّم نفسك</div>
+        <div class="formula-strip">
+          <span>من 1 إلى 10، ما مدى [المعيار في عملك]؟</span>
+          <button class="copy-btn" onclick="copyHook('من 1 إلى 10، ما مدى [المعيار في عملك]؟')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> من 1 إلى 10، ما مدى وضوح عرضك التجاري لشخص غريب يراه لأول مرة؟</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> من 1 إلى 10، ما مدى سرعة رد فريق المبيعات لديك على استفسارات العملاء الجدد؟</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. اعتراض مفتوح</div>
+        <div class="formula-strip">
+          <span>ما أكبر اعتراض أو خوف يمنعك من [الخطوة القادمة]؟</span>
+          <button class="copy-btn" onclick="copyHook('ما أكبر اعتراض أو خوف يمنعك من [الخطوة القادمة]؟')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> ما أكبر اعتراض يمنعك من الظهور بصوتك وصورتك أمام كاميرا الفيديو؟</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> ما أكبر اعتراض تسمعه دائماً من العميل قبل توقيع العقد النهائي لشراء خدمتك؟</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل التفاعل يفتح محادثة استشارية حقيقية مع جمهورك المستهدف؟</div>
+    </article>
+
+    <!-- الفئة 16 -->
+    <article id="cat-16" class="category-card" data-tags="أداة ذكاء اصطناعي برومبت ai أتمتة">
+      <div class="category-top">
+        <div>
+          <span class="category-id">الفئة 16</span>
+          <h3 class="category-heading">الأداة والذكاء الاصطناعي (AI & Tools)</h3>
+        </div>
+      </div>
+      <p class="category-description">ابدأ بالمهمة الإنسانية والنتيجة الاستراتيجية، ثم قدّم أداة الذكاء الاصطناعي؛ ولا تجعل اسم الأداة المجرد هو القيمة كلها.</p>
+
+      <div class="formula-unit">
+        <div class="formula-title">1. أداة لمهمة</div>
+        <div class="formula-strip">
+          <span>هذه الأداة تختصر [المهمة الشاقة] من [وقت طويل] إلى [دقائق معدودة].</span>
+          <button class="copy-btn" onclick="copyHook('هذه الأداة تختصر [المهمة الشاقة] من [وقت طويل] إلى [دقائق معدودة].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> هذه الأداة تختصر تفريغ وتحليل مقابلة العميل من ساعة عمل إلى 3 دقائق فقط.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> هذه الأداة تجمع كل تعليقات وإحصائيات الحملة في لوحة واحدة بدل التنقل بين خمسة ملفات.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">2. برومبت عملي (Prompt Engineering)</div>
+        <div class="formula-strip">
+          <span>استخدم هذا البرومبت لتحويل [المدخل الخام] إلى [المخرج الإبداعي].</span>
+          <button class="copy-btn" onclick="copyHook('استخدم هذا البرومبت لتحويل [المدخل الخام] إلى [المخرج الإبداعي].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> استخدم هذا البرومبت لتحويل مراجعات وتقييمات العملاء السلبية إلى زوايا إعلانية معالجة.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> استخدم هذا البرومبت لتحويل درس طويل أو ملف PDF إلى خمسة أنشطة صفية تفاعلية.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">3. الإنسان مع الأداة (The Human in the Loop)</div>
+        <div class="formula-strip">
+          <span>الذكاء الاصطناعي يعطيك [المخرج الأولي]، لكن عليك أنت [الحكم البشري].</span>
+          <button class="copy-btn" onclick="copyHook('الذكاء الاصطناعي يعطيك [المخرج الأولي]، لكن عليك أنت [الحكم البشري].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> الذكاء الاصطناعي يعطيك عشرين عنواناً جذاباً، لكن عليك أنت وحدك اختيار الوعد الصادق.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> الذكاء الاصطناعي يلخص بيانات الحملة، لكن عليك أنت تفسير أثرها النفسي على قرار العميل.</div>
+        </div>
+      </div>
+
+      <div class="formula-unit">
+        <div class="formula-title">4. مقارنة أدوات</div>
+        <div class="formula-strip">
+          <span>استخدم [الأداة أ] عندما [الحالة الأولى]، واستخدم [الأداة ب] عندما [الحالة الثانية].</span>
+          <button class="copy-btn" onclick="copyHook('استخدم [الأداة أ] عندما [الحالة الأولى]، واستخدم [الأداة ب] عندما [الحالة الثانية].')">نسخ</button>
+        </div>
+        <div class="example-grid">
+          <div class="example-pill"><span class="example-pill-label">التسويق الرقمي:</span> استخدم أداة البحث المعمقة للمصادر الدقيقة، واستخدم نماذج التوليد للصياغة والتهذيب اللغوي.</div>
+          <div class="example-pill content"><span class="example-pill-label">صناعة المحتوى:</span> استخدم مولدات الصور للمشهد الإبداعي الخيالي، وبرامج التصميم المتجهة للقياسات والنصوص الدقيقة.</div>
+        </div>
+      </div>
+      <div class="category-audit-footer"><span>🔍 مراجعة الفئة:</span> هل يوضح المحتوى كيف يتحكم الإنسان بالنتيجة الذكية؟</div>
+    </article>
+
+    <!-- ==================== تكييف الهوك حسب المنصة ==================== -->
+    <section id="platforms" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>📱</span> تكييف الهوك حسب طبيعة المنصة</h2>
+        <span class="section-badge">PLATFORMS</span>
+      </div>
+
+      <div class="platform-grid">
+        <div class="platform-card">
+          <div>
+            <div class="platform-title"><span>🎬</span> ريلز / تيك توك / شورتس</div>
+            <div class="platform-structure">جملة قصيرة قابلة للنطق + حركة بصرية حية تثبتها</div>
+            <p class="platform-desc">ابدأ بالصراع أو النتيجة فوراً؛ ضع النص الأساسي كـ Overlay في الثلث الأوسط؛ ولا تجعل التحية أو التعريف يسبق الفكرة.</p>
+          </div>
+          <div class="platform-example">«3 ثوانٍ كانت كفيلة بإضاعة العميل… شاهد أين توقف بالضبط في الفيديو.»</div>
+        </div>
+
+        <div class="platform-card">
+          <div>
+            <div class="platform-title"><span>📑</span> كاروسيل إنستغرام / لينكدإن</div>
+            <div class="platform-structure">عنوان الغلاف يحدد المشكلة؛ الشريحة 2 توسع الفجوة</div>
+            <p class="platform-desc">اجعل كل شريحة سببًا للانتقال إلى التالية، واختم بملخص مكثف قابل للحفظ والمشاركة مع الفريق.</p>
+          </div>
+          <div class="platform-example">«7 أسباب تجعل محتواك مفيداً جداً… لكنه لا يبني أي طلب تجاري حقيقي.»</div>
+        </div>
+
+        <div class="platform-card">
+          <div>
+            <div class="platform-title"><span>💼</span> لينكدإن / فيسبوك النصي</div>
+            <div class="platform-structure">أول سطرين يحملان الموقف أو الرأي المخالف أو القصة</div>
+            <p class="platform-desc">أعط سياقًا مهنياً كافيًا قبل رابط (See more)، واستخدم فقرات قصيرة لا تتعدى سطرين مع دليل من الواقع.</p>
+          </div>
+          <div class="platform-example">«أجمل تقرير حملة إعلانية كتبته في مسيرتي كان عديم الفائدة تماماً لصاحب القرار.»</div>
+        </div>
+
+        <div class="platform-card">
+          <div>
+            <div class="platform-title"><span>🎯</span> الإعلانات الممولة (Paid Ads)</div>
+            <div class="platform-structure">المشكلة/النتيجة + العرض الملموس + الدليل الموثق</div>
+            <p class="platform-desc">طابق الهوك بدقة مع مرحلة وعي الجمهور وصفحة الوصول (Landing Page)؛ وتجنب الادعاءات التي ترفضها سياسات المنصات.</p>
+          </div>
+          <div class="platform-example">«تدفع ميزانية ضخمة للرسائل ولا ترى حجوزات؟ أصلح أول 10 دقائق من المتابعة.»</div>
+        </div>
+
+        <div class="platform-card">
+          <div>
+            <div class="platform-title"><span>✉️</span> البريد الإلكتروني (Email Subject)</div>
+            <div class="platform-structure">موضوع واضح يثير فضولاً مشروعاً + سطر معاينة مكمل</div>
+            <p class="platform-desc">تجنب الغموض المضلل؛ ولا تجعل عنوان الرسالة يعد بما لا يوجد في نصها لتفادي تصنيف رسائلك كسبام.</p>
+          </div>
+          <div class="platform-example">الموضوع: أين تضيع طلباتك؟ | المعاينة: ثلاث نقاط تسريب في مسار المتابعة.</div>
+        </div>
+
+        <div class="platform-card">
+          <div>
+            <div class="platform-title"><span>🌐</span> صفحات الهبوط (Landing Pages)</div>
+            <div class="platform-structure">عنوان رئيسي بالنتيجة والفئة + عنوان فرعي يشرح الآلية</div>
+            <p class="platform-desc">لا تعتمد على البلاغة الزائدة؛ اجعل الزائر يفهم ما تقدمه ومن أنت وكيف يستفيد خلال أول 5 ثوانٍ من فتح الصفحة.</p>
+          </div>
+          <div class="platform-example">«حوّل استفسارات العيادة إلى حجوزات قابلة للقياس — نظام رسائل ومتابعة لفريق الاستقبال.»</div>
+        </div>
+
+        <div class="platform-card" style="grid-column: 1 / -1;">
+          <div>
+            <div class="platform-title"><span>🔴</span> يوتيوب طويل (Long-form YouTube)</div>
+            <div class="platform-structure">العنوان والصورة المصغرة يصنعان التوقع، والمقدمة تسدده سريعاً في أول 30 ثانية</div>
+            <p class="platform-desc">ابدأ بسبب المشاهدة وأهميته للمشاهد، ثم قدّم خريطة طريق مختصرة وسريعة لما سيحصل عليه قبل الدخول في الشرح.</p>
+          </div>
+          <div class="platform-example">«اختبرت 5 زوايا إعلانية مختلفة بميزانية حقيقية — هذه الزاوية الوحيدة التي ضاعفت جودة العملاء.»</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== مراحل القمع التسويقي ومستويات الوعي ==================== -->
+    <section id="funnel" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>🎯</span> الهوك عبر مراحل القمع التسويقي ودرجات الوعي</h2>
+        <span class="section-badge">STRATEGY</span>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>المرحلة التسويقية</th>
+              <th>مهمة الهوك الأساسية</th>
+              <th>مثال تطبيقي</th>
+              <th>مؤشر النجاح (KPI)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color: var(--accent-cyan);">الوعي (Awareness)</strong></td>
+              <td>سمِّ المشكلة أو الرغبة بلغة الجمهور الدارجة.</td>
+              <td>لماذا يشاهد الناس خدمتك ثم ينسونها في اليوم التالي؟</td>
+              <td>مشاهدة مؤهلة / معدل احتفاظ</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--accent-blue);">الاهتمام (Interest)</strong></td>
+              <td>اشرح الآلية أو اطرح زاوية جديدة غير مألوفة.</td>
+              <td>المشكلة ليست في كثرة المنافسين؛ بل في تشابه رسالتك معهم.</td>
+              <td>معدل الحفظ / المتابعة / الزيارة</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--accent-gold);">التقييم (Evaluation)</strong></td>
+              <td>قدّم مقارنة موضوعية، دليلاً رقمياً، أو أزل اعتراضاً.</td>
+              <td>قبل أن تختار شركة تسويق، اسأل عن هذه المؤشرات الأربعة.</td>
+              <td>قراءة كامل الصفحة / فتح رسالة</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--accent-hook);">التحويل (Conversion)</strong></td>
+              <td>اربط النتيجة الملموسة بعرض واضح وخطوة محددة.</td>
+              <td>إذا أردت تشخيص مسار الاستفسار، احجز جلستك المجانية.</td>
+              <td>طلب / تسجيل / شراء مباشر</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--accent-green);">الاحتفاظ (Retention)</strong></td>
+              <td>ساعد العميل على تعظيم القيمة المحققة بعد الشراء.</td>
+              <td>اشتريت الأداة؟ هذه أول 3 إعدادات تمنع فوضى الفريق.</td>
+              <td>معدل الاستخدام / التجديد / الإحالة</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box callout-gold">
+        <div class="callout-title"><span>🧠</span> مطابقة الهوك لدرجات وعي العميل الـ 5 (Eugene Schwartz Framework)</div>
+        <ul style="padding-right: 1.5rem; line-height: 1.9; color: var(--text-main); list-style-type: circle;">
+          <li><strong>غير واعٍ بالمشكلة (Unaware):</strong> استخدم موقفاً يومياً أو عرضاً محسوساً بدل ذكر اسم الحل أو المنتج مباشرة.</li>
+          <li><strong>واعٍ بالمشكلة (Problem-Aware):</strong> شخّص سبب المشكلة بوضوح وبيّن تكلفة الاستمرار في تجاهلها.</li>
+          <li><strong>واعٍ بالحلول (Solution-Aware):</strong> قارن بين الآليات المتاحة والمعايير الموضوعية للاختيار، وابتعد عن الشعارات.</li>
+          <li><strong>واعٍ بعرضك (Product-Aware):</strong> أزل اعتراضاً محدداً يقف أمام الشراء وقدّم دليلاً قوياً وخطوة بسيطة.</li>
+          <li><strong>جاهز للشراء تماماً (Most Aware):</strong> اجعل تفاصيل العرض والتوقيت والضمانات واضحة تماماً دون حشو لفظي.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==================== التحسين: من عام إلى محدد والأخطاء ==================== -->
+    <section id="refinement" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>🔬</span> التحسين والتنقيح: من هوك عام إلى هوك محدد</h2>
+        <span class="section-badge">BEFORE & AFTER</span>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 45%; color: #f87171;">قبل التحديد (عام وضعيف)</th>
+              <th style="color: #4ade80;">بعد التحديد (قوي ومغناطيسي)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>نصائح سريعة لزيادة المبيعات في متجرك.</td>
+              <td>3 أسئلة في أول رسالة ترفع جودة متابعة العملاء المحتملين وتمنع تبريدهم.</td>
+            </tr>
+            <tr>
+              <td>كيف تنجح في صناعة المحتوى على السوشيال ميديا؟</td>
+              <td>لو كان محتواك مفيداً ولا يجلب فرص عمل، راجع المسافة بين الشرح المجاني وعرض البيع.</td>
+            </tr>
+            <tr>
+              <td>أفضل استراتيجية لإعلانات ممولة ناجحة.</td>
+              <td>قبل زيادة ميزانية حملة الرسائل، قِس نسبة الرد خلال أول 10 دقائق من وصول العميل.</td>
+            </tr>
+            <tr>
+              <td>استخدم الذكاء الاصطناعي لكتابة منشوراتك.</td>
+              <td>حوّل 20 مراجعة وتقييماً حقيقياً لعملائك إلى 5 زوايا إعلانية بضربة واحدة عبر هذا البرومبت.</td>
+            </tr>
+            <tr>
+              <td>لا تفوّت هذه الفرصة الذهبية وسجل الآن.</td>
+              <td>التسجيل يغلق الخميس: ابدأ بخطة محتوى متكاملة لـ 30 يوماً وقوالب تنفيذ جاهزة للنسخ.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box">
+        <div class="callout-title"><span>⚠️</span> 8 أخطاء شائعة تقتل قوة الهوك في مهدها:</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 0.75rem; font-size: 0.92rem; color: var(--text-muted);">
+          <div>❌ <strong>الغموض:</strong> القارئ لا يفهم الموضوع أو الفائدة.</div>
+          <div>❌ <strong>المبالغة:</strong> وعد ضخم خيالي يعجز المحتوى عن إثباته.</div>
+          <div>❌ <strong>التمهيد والتحية:</strong> استهلاك ثواني الانتباه في الترحيب.</div>
+          <div>❌ <strong>الجمهور الواسع:</strong> مخاطبة الجميع فلا يشعر أحد بالصلة.</div>
+          <div>❌ <strong>الفجوة المفتوحة:</strong> إثارة فضول معلق بلا إجابة شافية.</div>
+          <div>❌ <strong>الانفصال التام:</strong> هوك براق يقود لمحتوى أو عرض مختلف.</div>
+          <div>❌ <strong>تكرار التريند:</strong> استعارة صيغة لا تناسب وقار علامتك.</div>
+          <div>❌ <strong>التركيز على الأداة:</strong> تسمية تطبيق دون ربطه بمهمة عملية.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== منهجية التوليد واختبار A/B ==================== -->
+    <section id="ideation-testing" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>⚙️</span> نظام كتابة 10 هوكات من فكرة واحدة واختبار A/B</h2>
+        <span class="section-badge">WORKFLOW</span>
+      </div>
+
+      <div class="callout-box callout-cyan">
+        <div class="callout-title"><span>💡</span> الفكرة الأساسية (The Core Idea):</div>
+        <p style="font-size: 1.05rem; color: var(--text-main); font-weight: 600;">
+          «كثير من الحملات الإعلانية لا تفشل بسبب مدير الإعلانات أو الاستهداف، بل تفشل في عملية المتابعة بعد وصول العميل المحتمل.»
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
+        <div class="starter-card"><div><span style="color: var(--accent-hook); font-weight: 700;">فضول:</span> المكان الذي تضيع فيه أغلب ميزانية الإعلان ليس داخل مدير الإعلانات.</div></div>
+        <div class="starter-card"><div><span style="color: #f87171; font-weight: 700;">تحذير:</span> إذا كان فريقك يرد بعد ساعتين، فلا تزد ميزانية حملة الرسائل أبداً.</div></div>
+        <div class="starter-card"><div><span style="color: var(--accent-cyan); font-weight: 700;">سؤال:</span> لماذا تأتيك رسائل كثيرة ولا يتحول منها إلا القليل لحجوزات فعلية؟</div></div>
+        <div class="starter-card"><div><span style="color: var(--accent-gold); font-weight: 700;">قائمة:</span> 5 نقاط افحصها بين لحظة وصول الرسالة وتأكيد موعد العميل.</div></div>
+        <div class="starter-card"><div><span style="color: var(--accent-purple); font-weight: 700;">رأي مخالف:</span> الإعلان التسويقي الممتاز لا يعوض أبداً متابعة مبيعات بطيئة.</div></div>
+        <div class="starter-card"><div><span style="color: #38bdf8; font-weight: 700;">قصة:</span> كنا على وشك إيقاف الحملة نهائياً، ثم راجعنا نص أول رسالة يرسلها الفريق.</div></div>
+        <div class="starter-card"><div><span style="color: #4ade80; font-weight: 700;">دليل:</span> بعد تصنيف 100 محادثة مبيعات، ظهر نفس الاعتراض في الخطوة الأولى.</div></div>
+        <div class="starter-card"><div><span style="color: #fb923c; font-weight: 700;">مقارنة:</span> رد آلي سريع أم رد بشري متأخر؟ الاختيار الذكي يعتمد على هذه اللحظة.</div></div>
+        <div class="starter-card"><div><span style="color: #22d3ee; font-weight: 700;">نتيجة:</span> كيف تحوّل محادثة استفسار باردة إلى موعد مؤكد بثلاث رسائل فقط.</div></div>
+        <div class="starter-card"><div><span style="color: #facc15; font-weight: 700;">بيع مباشر:</span> إذا أردت كشف نقاط تسرب العملاء من محادثاتك، ابدأ بجلسة تدقيق المسار.</div></div>
+      </div>
+
+      <div class="callout-box callout-gold" style="margin-top: 2rem;">
+        <div class="callout-title"><span>🧪</span> بروتوكول اختبار A/B للهوك الإعلاني:</div>
+        <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-main);">
+          غيّر <strong>عنصرًا واحدًا فقط</strong> في كل جولة اختبار حتى تتأكد من سبب الفارق الرقمي: الزاوية النفسية، درجة التحديد، نوع الدليل، أو الصياغة اللفظية. مع تثبيت باقي عناصر الإعلان (الفيديو، التصميم، صفحة الهبوط، والجمهور المستهدف).
+        </p>
+        <div style="background: rgba(0,0,0,0.25); padding: 0.85rem; border-radius: var(--radius-sm); margin-top: 0.75rem; font-size: 0.9rem;">
+          <div>• <strong>الفرضية:</strong> الهوك المحدد بالمشكلة سيحقق احتفاظاً أعلى من الهوك العام.</div>
+          <div>• <strong>النسخة A:</strong> «كيف تحسن تسويقك الرقمي؟»</div>
+          <div>• <strong>النسخة B:</strong> «تأتيك رسائل ولا تتحول لحجوزات؟ افحص أول 10 دقائق.»</div>
+          <div>• <strong>القرار:</strong> اعتمد النسخة الفائزة كـ Control، ثم اختبر زاوية جديدة ضدها.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== قائمة المراجعة وحاسبة التقييم ==================== -->
+    <section id="checklist" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>✅</span> قائمة المراجعة التفاعلية وحاسبة مقياس الـ 20 نقطة</h2>
+        <span class="section-badge">RUBRIC & CHECKLIST</span>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 0.95rem;">انقر على أي بند لتحديده كمنجز أثناء مراجعة سكريبت إعلانك (يتم حفظ التحديد تلقائياً في متصفحك):</p>
+
+      <div class="checklist-grid" id="checklist-container">
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="0">
+          <span class="checklist-label">يخاطب شخصًا أو موقفًا محدداً وواضحاً.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="1">
+          <span class="checklist-label">يُفهم بسلاسة من قراءة أو استماع لمرة واحدة.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="2">
+          <span class="checklist-label">يبدأ بأقوى جزء ولا يدفن الفكرة في تمهيد ومقدمات.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="3">
+          <span class="checklist-label">يعد بفائدة محددة، ملموسة، وقابلة للتصديق.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="4">
+          <span class="checklist-label">يتطابق تماماً مع المحتوى والعرض وصفحة الوصول.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="5">
+          <span class="checklist-label">يحتوي صلب المحتوى على دليل أو آلية تسدد الوعد.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="6">
+          <span class="checklist-label">لا يستخدم تخويفاً مبالغاً فيه أو ندرة مصطنعة كاذبة.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="7">
+          <span class="checklist-label">يمكن اختصاره لفظياً دون خسارة جوهر المعنى.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="8">
+          <span class="checklist-label">يتطابق تماماً مع نبرة صوت العلامة التجارية ولغة الجمهور.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="9">
+          <span class="checklist-label">للفيديو: تدعمه اللقطة البصرية الأولى والنص المكتوب على الشاشة.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="10">
+          <span class="checklist-label">للإعلانات: يتطابق مع درجة وعي الشريحة المستهدفة بالقمع.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="11">
+          <span class="checklist-label">للبريد الإلكتروني: يكمل سطر المعاينة المعنى بدل تكراره.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="12">
+          <span class="checklist-label">كتبت 3 بدائل مختلفة على الأقل قبل الاختيار النهائي.</span>
+        </label>
+        <label class="checklist-item">
+          <input type="checkbox" class="checklist-checkbox" data-index="13">
+          <span class="checklist-label">حددت مسبقاً المؤشر الرقمي (KPI) الذي سيحكم على نجاحه.</span>
+        </label>
+      </div>
+
+      <!-- الحاسبة التفاعلية للمقياس -->
+      <div class="rubric-calculator">
+        <h3 style="font-family: var(--font-heading); color: var(--accent-cyan); font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>🧮</span> حاسبة تقييم الهوك اللحظية (20-Point Calculator)
+        </h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">حرّك مؤشرات المعايير الخمسة لاحتساب قوة الهوك الذي كتبته والحصول على قرار النشر الفوري:</p>
+
+        <div class="rubric-criteria-grid">
+          <div class="rubric-item">
+            <div class="rubric-item-header">
+              <span class="rubric-name">1. الوضوح المباشر (Clarity)</span>
+              <span class="rubric-val" id="val-clarity">4 / 4</span>
+            </div>
+            <input type="range" min="0" max="4" value="4" class="rubric-slider" id="slider-clarity" oninput="calculateRubric()">
+          </div>
+
+          <div class="rubric-item">
+            <div class="rubric-item-header">
+              <span class="rubric-name">2. الصلة بالجمهور (Relevance)</span>
+              <span class="rubric-val" id="val-relevance">4 / 4</span>
+            </div>
+            <input type="range" min="0" max="4" value="4" class="rubric-slider" id="slider-relevance" oninput="calculateRubric()">
+          </div>
+
+          <div class="rubric-item">
+            <div class="rubric-item-header">
+              <span class="rubric-name">3. قوة الفائدة أو الفضول (Impact)</span>
+              <span class="rubric-val" id="val-impact">4 / 4</span>
+            </div>
+            <input type="range" min="0" max="4" value="4" class="rubric-slider" id="slider-impact" oninput="calculateRubric()">
+          </div>
+
+          <div class="rubric-item">
+            <div class="rubric-item-header">
+              <span class="rubric-name">4. مصداقية الوعد (Credibility)</span>
+              <span class="rubric-val" id="val-credibility">4 / 4</span>
+            </div>
+            <input type="range" min="0" max="4" value="4" class="rubric-slider" id="slider-credibility" oninput="calculateRubric()">
+          </div>
+
+          <div class="rubric-item" style="grid-column: 1 / -1;">
+            <div class="rubric-item-header">
+              <span class="rubric-name">5. التطابق مع المحتوى والـ CTA (Alignment)</span>
+              <span class="rubric-val" id="val-alignment">4 / 4</span>
+            </div>
+            <input type="range" min="0" max="4" value="4" class="rubric-slider" id="slider-alignment" oninput="calculateRubric()">
+          </div>
+        </div>
+
+        <div class="rubric-result-box">
+          <div class="rubric-score-display">
+            <span style="font-family: var(--font-heading); font-size: 1rem; color: var(--text-muted);">المجموع الكلي:</span>
+            <span class="score-number" id="rubric-total">20</span>
+            <span style="font-family: var(--font-heading); color: var(--text-dim);">من 20</span>
+          </div>
+          <div class="score-verdict-badge" id="rubric-verdict" style="background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e;">
+            🔥 استثنائي وجاهز للنشر والاختبار فوراً!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ملحق حصري: برومبتات الذكاء الاصطناعي للملاحين ==================== -->
+    <section id="ai-prompts" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>🤖</span> ملحق حصري لمجتمع AI Navigators: 5 برومبتات لتوليد واختبار الهوكات</h2>
+        <span class="section-badge" style="background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); border-color: var(--accent-purple);">EXCLUSIVE AI PROMPTS</span>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        بصفتك أحد ملاحي الذكاء الاصطناعي، استخدم هذه البرومبتات المهندسة بدقة في ChatGPT، Claude، أو Gemini لتوليد وفحص هوكاتك التسويقية في ثوانٍ معدودة:
+      </p>
+
+      <!-- برومبت 1 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title"><span>🎯</span> 1. برومبت تحويل المشكلة إلى 10 زوايا هوك نفسية</span>
+          <button class="copy-btn" onclick="copyHook(document.getElementById('prompt-text-1').innerText)">نسخ البرومبت</button>
+        </div>
+        <div class="prompt-content" id="prompt-text-1">أنت خبير Copywriting وهندسة هوكات محتوى.
+المشروع: [اكتب اسم مشروعك أو خدمتك هنا]
+الجمهور المستهدف: [صف عميلك بدقة]
+المشكلة المؤرقة: [اكتب مشكلة العميل أو اعتراضا حقيقيا]
+
+المطلوب:
+ولّد لي 10 هوكات مختلفة من هذه الفكرة الواحدة مستندا إلى الأنماط النفسية العشرة التالية:
+1. الفضول والفجوة المعرفية.
+2. التحذير والخسارة المالية/الزمنية.
+3. النتيجة والتحول من وضع لوضع.
+4. الأرقام والقائمة الدقيقة.
+5. الرأي المخالف وكسر الاعتقاد السائد.
+6. القصة ولحظة التغيير المفاجئة.
+7. الإثبات الاجتماعي ودراسة الحالة.
+8. المقارنة ومعايير الاختيار.
+9. السرعة والقالب الجاهز.
+10. العرض البيعي المباشر وإزالة الاعتراض.
+اجعل كل هوك لا يتجاوز 15 كلمة ومباشرا دون مقدمات إنشائية.</div>
+      </div>
+
+      <!-- برومبت 2 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title"><span>📊</span> 2. برومبت التحكيم والتقييم بمقياس الـ 20 نقطة</span>
+          <button class="copy-btn" onclick="copyHook(document.getElementById('prompt-text-2').innerText)">نسخ البرومبت</button>
+        </div>
+        <div class="prompt-content" id="prompt-text-2">تصرف كمدير تسويق رقمي ومدقق إعلاني صارم.
+إليك الهوك الذي كتبته:
+«[الصق الهوك هنا]»
+الجمهور المستهدف: [اذكر جمهورك]
+الهدف: [مشاهدة / نقرة / حجز / شراء]
+
+المطلوب:
+قيّم هذا الهوك بناءً على معايير "هندسة الهوك" الخمسة (درجة من 0 إلى 4 لكل معيار):
+1. الوضوح المباشر في أول 3 ثوانٍ.
+2. الصلة بألم الجمهور الحقيقي.
+3. قوة الفائدة أو الفضول المشروع.
+4. مصداقية الوعد وخلوه من الكليك بيت.
+5. الانسجام مع الخطوة التالية (CTA).
+
+احسب المجموع من 20، وأعطني نقداً تحريرياً صريحاً بنقطتي قوة ونقطتي ضعف، واقترح نسختين محسنتين أعلى تحديداً وجاذبية.</div>
+      </div>
+
+      <!-- برومبت 3 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title"><span>🎬</span> 3. برومبت هندسة هوك الريلز والتيك توك (أول 3 ثوانٍ)</span>
+          <button class="copy-btn" onclick="copyHook(document.getElementById('prompt-text-3').innerText)">نسخ البرومبت</button>
+        </div>
+        <div class="prompt-content" id="prompt-text-3">أريد كتابة سكريبت فيديو قصير (Reels / TikTok) حول: [الموضوع].
+المطلوب صياغة 5 خيارات للهوك المرئي والمسموع في أول 3 ثوانٍ.
+لكل خيار اذكر:
+1. الجملة الصوتية المنطوقة (أقل من 8 كلمات وسريعة البديهة).
+2. المشهد أو الحركة البصرية أمام الكاميرا (Visual Hook).
+3. النص المكتوب على الشاشة (Text Overlay) مكملا للكلام وليس مكرراً له.
+اجعل الهوكات تكسر النمط (Pattern Interrupt) فوراً دون أي تحية أو تعريف بالنفس.</div>
+      </div>
+
+      <!-- برومبت 4 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title"><span>🧗</span> 4. برومبت تكييف الهوك عبر مراحل الوعي الخمسة (Schwartz)</span>
+          <button class="copy-btn" onclick="copyHook(document.getElementById('prompt-text-4').innerText)">نسخ البرومبت</button>
+        </div>
+        <div class="prompt-content" id="prompt-text-4">خدمتي هي: [اسم الخدمة وميزتها الأساسية].
+المطلوب صياغة هوك مخصص لكل مرحلة من مراحل الوعي الخمسة ليوجين شوارتز:
+1. غير واع بالمشكلة (Unaware): هوك يصف موقفا يوميا ملموسا دون ذكر اسم الحل.
+2. واع بالمشكلة (Problem-Aware): هوك يشخص الألم وتكلفة استمراره.
+3. واع بالحلول (Solution-Aware): هوك يقارن الآليات والمعايير بموضوعية.
+4. واع بالمنتج (Product-Aware): هوك يزيل اعتراضا محددا ويقدم دليلا قاطعا.
+5. جاهز للشراء (Most-Aware): هوك يعلن العرض والشروط بوضوح مباشر.</div>
+      </div>
+
+      <!-- برومبت 5 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title"><span>🛡️</span> 5. برومبت فحص الوعود الكاذبة وتطهير الكليك بيت</span>
+          <button class="copy-btn" onclick="copyHook(document.getElementById('prompt-text-5').innerText)">نسخ البرومبت</button>
+        </div>
+        <div class="prompt-content" id="prompt-text-5">راجع الهوك التالي والمحتوى التابع له للتأكد من خلوه من أي خداع أو مبالغات تضر بسمعة البراند:
+الهوك: [ضع الهوك]
+ملخص المحتوى المقدم: [ضع ملخص المحتوى الحقيقي]
+
+المطلوب:
+1. هل هناك فجوة بين ما يعد به الهوك وما يقدمه المحتوى فعلا؟
+2. هل يحتوي الهوك على ندرة كاذبة أو تخويف غير مبرر؟
+3. كيف يمكن إعادة صياغة الهوك ليظل جذابا ومثيرا للفضول مع الحفاظ على الأمانة والمصداقية المهنية الكاملة؟</div>
+      </div>
+    </section>
+
+    <!-- ==================== ورقة العمل التفاعلية ==================== -->
+    <section id="worksheet" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>✏️</span> ورقة العمل التطبيقية القابلة للنسخ والملء</h2>
+        <span class="section-badge">INTERACTIVE WORKSHEET</span>
+      </div>
+
+      <div class="worksheet-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+          <h3 style="font-family: var(--font-heading); color: var(--accent-gold); font-size: 1.25rem;">
+            ورقة هندسة الهوك لمشروعك الحالي
+          </h3>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn-nav" onclick="exportWorksheet()">تصدير ورقة العمل 📋</button>
+            <button class="btn-nav" onclick="resetWorksheet()">إفراغ الحقول 🔄</button>
+          </div>
+        </div>
+
+        <div class="worksheet-grid">
+          <div class="worksheet-field">
+            <label class="worksheet-label">اسم المشروع أو العلامة التجارية:</label>
+            <input type="text" id="ws-project" class="worksheet-input" placeholder="مثال: عيادة د. فلان / منصة تعليمية...">
+          </div>
+          <div class="worksheet-field">
+            <label class="worksheet-label">الجمهور المستهدف بدقة:</label>
+            <input type="text" id="ws-audience" class="worksheet-input" placeholder="مثال: أصحاب المتاجر الإلكترونية في مرحلة البداية...">
+          </div>
+          <div class="worksheet-field">
+            <label class="worksheet-label">مرحلة وعي الجمهور بالقمع:</label>
+            <input type="text" id="ws-awareness" class="worksheet-input" placeholder="مثال: واعٍ بالمشكلة / واعٍ بالحلول...">
+          </div>
+          <div class="worksheet-field">
+            <label class="worksheet-label">الهدف التسويقي الأساسي:</label>
+            <input type="text" id="ws-goal" class="worksheet-input" placeholder="مثال: تسجيل في ورشة عمل / حجز استشارة...">
+          </div>
+          <div class="worksheet-field full">
+            <label class="worksheet-label">المشكلة أو الرغبة الحقيقية كما يشعر بها العميل:</label>
+            <textarea id="ws-problem" class="worksheet-textarea" placeholder="صف الموقف الحقيقي الذي يمر به العميل..."></textarea>
+          </div>
+          <div class="worksheet-field full">
+            <label class="worksheet-label">لغة العميل كما نطقها بلسانه (اقتباس أو شكوى حقيقية):</label>
+            <textarea id="ws-voice" class="worksheet-textarea" placeholder="«الناس تسأل عن السعر وتختفي...»"></textarea>
+          </div>
+          <div class="worksheet-field">
+            <label class="worksheet-label">الدليل المتوفر في المحتوى لإثبات الوعد:</label>
+            <input type="text" id="ws-proof" class="worksheet-input" placeholder="مثال: دراسة حالة حقيقية / مقارنة 3 شاشات...">
+          </div>
+          <div class="worksheet-field">
+            <label class="worksheet-label">فئة الهوك والمعادلة المختارة:</label>
+            <input type="text" id="ws-category" class="worksheet-input" placeholder="مثال: فئة 01 - ما لا يخبرك به أحد...">
+          </div>
+          <div class="worksheet-field full">
+            <label class="worksheet-label">البديل الأول للهوك (Angle A):</label>
+            <input type="text" id="ws-angle-a" class="worksheet-input" placeholder="الصياغة الأولى...">
+          </div>
+          <div class="worksheet-field full">
+            <label class="worksheet-label">البديل الثاني للهوك (Angle B):</label>
+            <input type="text" id="ws-angle-b" class="worksheet-input" placeholder="الصياغة الثانية (زاوية مختلفة)...">
+          </div>
+          <div class="worksheet-field full">
+            <label class="worksheet-label">البديل الثالث للهوك (Angle C):</label>
+            <input type="text" id="ws-angle-c" class="worksheet-input" placeholder="الصياغة الثالثة...">
+          </div>
+          <div class="worksheet-field full">
+            <label class="worksheet-label" style="color: var(--accent-hook); font-size: 1rem;">النسخة الفائزة المختارة للنشر:</label>
+            <input type="text" id="ws-final-hook" class="worksheet-input" style="border-color: var(--accent-hook); font-weight: 700;" placeholder="ضع هنا الهوك النهائي بعد اختباره بالصوت...">
+          </div>
+          <div class="worksheet-field">
+            <label class="worksheet-label">الدعوة للفعل المحددة (CTA):</label>
+            <input type="text" id="ws-cta" class="worksheet-input" placeholder="مثال: اضغط الرابط واحصل على القالب...">
+          </div>
+          <div class="worksheet-field">
+            <label class="worksheet-label">مؤشر القياس الرقمي للنجاح (KPI):</label>
+            <input type="text" id="ws-kpi" class="worksheet-input" placeholder="مثال: معدل الاحتفاظ أول 5 ثوانٍ / معدل التحويل...">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== بنك سريع: 30 بداية جاهزة ==================== -->
+    <section id="starters-bank" class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>⚡</span> بنك سريع: 30 بداية هوك قابلة للتخصيص المباشر</h2>
+        <span class="section-badge">QUICK STARTERS</span>
+      </div>
+
+      <div class="starters-grid">
+        <div class="starter-card"><span>1. لو أنت [الجمهور] و[المشكلة]، ابدأ من هنا.</span> <button class="copy-btn" onclick="copyHook('لو أنت [الجمهور] و[المشكلة]، ابدأ من هنا.')">نسخ</button></div>
+        <div class="starter-card"><span>2. قبل أن [القرار]، اسأل نفسك [السؤال].</span> <button class="copy-btn" onclick="copyHook('قبل أن [القرار]، اسأل نفسك [السؤال].')">نسخ</button></div>
+        <div class="starter-card"><span>3. هذا الخطأ يجعل [المجهود] لا يتحول إلى [النتيجة].</span> <button class="copy-btn" onclick="copyHook('هذا الخطأ يجعل [المجهود] لا يتحول إلى [النتيجة].')">نسخ</button></div>
+        <div class="starter-card"><span>4. في [مدة]، سأريك كيف تحقق [النتيجة].</span> <button class="copy-btn" onclick="copyHook('في [مدة]، سأريك كيف تحقق [النتيجة].')">نسخ</button></div>
+        <div class="starter-card"><span>5. كنت أظن [الاعتقاد القديم]، حتى حدث [الموقف].</span> <button class="copy-btn" onclick="copyHook('كنت أظن [الاعتقاد القديم]، حتى حدث [الموقف].')">نسخ</button></div>
+        <div class="starter-card"><span>6. أكبر خرافة منتشرة عن [الموضوع] هي [الاعتقاد].</span> <button class="copy-btn" onclick="copyHook('أكبر خرافة منتشرة عن [الموضوع] هي [الاعتقاد].')">نسخ</button></div>
+        <div class="starter-card"><span>7. [عدد] إشارات واضحة تقول إن [المشكلة].</span> <button class="copy-btn" onclick="copyHook('[عدد] إشارات واضحة تقول إن [المشكلة].')">نسخ</button></div>
+        <div class="starter-card"><span>8. ما لا يظهر في تقرير [القناة] هو [الفجوة].</span> <button class="copy-btn" onclick="copyHook('ما لا يظهر في تقرير [القناة] هو [الفجوة].')">نسخ</button></div>
+        <div class="starter-card"><span>9. إذا زاد [المؤشر] ولم يزد [الهدف]، راجع [العنصر].</span> <button class="copy-btn" onclick="copyHook('إذا زاد [المؤشر] ولم يزد [الهدف]، راجع [العنصر].')">نسخ</button></div>
+        <div class="starter-card"><span>10. لماذا [المشكلة] رغم أنك [السلوك الإيجابي]؟</span> <button class="copy-btn" onclick="copyHook('لماذا [المشكلة] رغم أنك [السلوك الإيجابي]؟')">نسخ</button></div>
+        <div class="starter-card"><span>11. الفرق بين [أ] و[ب] ليس [المتوقع]؛ بل [العامل].</span> <button class="copy-btn" onclick="copyHook('الفرق بين [أ] و[ب] ليس [المتوقع]؛ بل [العامل].')">نسخ</button></div>
+        <div class="starter-card"><span>12. هذا بالضبط ما أفعله عندما يحدث [الموقف].</span> <button class="copy-btn" onclick="copyHook('هذا بالضبط ما أفعله عندما يحدث [الموقف].')">نسخ</button></div>
+        <div class="starter-card"><span>13. أنت لا تحتاج [العقبة] كي تحقق [النتيجة].</span> <button class="copy-btn" onclick="copyHook('أنت لا تحتاج [العقبة] كي تحقق [النتيجة].')">نسخ</button></div>
+        <div class="starter-card"><span>14. جربنا [أ] ثم [ب]، وهذه كانت المفاجأة بالأرقام.</span> <button class="copy-btn" onclick="copyHook('جربنا [أ] ثم [ب]، وهذه كانت المفاجأة بالأرقام.')">نسخ</button></div>
+        <div class="starter-card"><span>15. قال العميل: «[الاقتباس]»؛ فغيّرنا [العنصر].</span> <button class="copy-btn" onclick="copyHook('قال العميل: «[الاقتباس]»؛ فغيّرنا [العنصر].')">نسخ</button></div>
+        <div class="starter-card"><span>16. لو بدأت من جديد اليوم، سأفعل [الخطوة] أولًا.</span> <button class="copy-btn" onclick="copyHook('لو بدأت من جديد اليوم، سأفعل [الخطوة] أولًا.')">نسخ</button></div>
+        <div class="starter-card"><span>17. إذا كان هدفك [أ] اختر [س]؛ وإذا كان [ب] اختر [ص].</span> <button class="copy-btn" onclick="copyHook('إذا كان هدفك [أ] اختر [س]؛ وإذا كان [ب] اختر [ص].')">نسخ</button></div>
+        <div class="starter-card"><span>18. توقف عن [السلوك المعتاد] وابدأ [البديل الذكي].</span> <button class="copy-btn" onclick="copyHook('توقف عن [السلوك المعتاد] وابدأ [البديل الذكي].')">نسخ</button></div>
+        <div class="starter-card"><span>19. طريقة واحدة لتحويل [المدخل] إلى [المخرج النهائي].</span> <button class="copy-btn" onclick="copyHook('طريقة واحدة لتحويل [المدخل] إلى [المخرج النهائي].')">نسخ</button></div>
+        <div class="starter-card"><span>20. هذا القالب يوفر عليك [الوقت/الخطأ الشائع].</span> <button class="copy-btn" onclick="copyHook('هذا القالب يوفر عليك [الوقت/الخطأ الشائع].')">نسخ</button></div>
+        <div class="starter-card"><span>21. هل عرضك واضح ومقنع؟ اختبره بهذا السؤال.</span> <button class="copy-btn" onclick="copyHook('هل عرضك واضح ومقنع؟ اختبره بهذا السؤال.')">نسخ</button></div>
+        <div class="starter-card"><span>22. كل أسبوع تؤجل فيه [القرار] يستمر [الأثر المالي].</span> <button class="copy-btn" onclick="copyHook('كل أسبوع تؤجل فيه [القرار] يستمر [الأثر المالي].')">نسخ</button></div>
+        <div class="starter-card"><span>23. قبل بداية الموسم، لا تنسَ تجهيز [الخطوة الأساسية].</span> <button class="copy-btn" onclick="copyHook('قبل بداية الموسم، لا تنسَ تجهيز [الخطوة الأساسية].')">نسخ</button></div>
+        <div class="starter-card"><span>24. هذه الأداة ممتازة لـ[المهمة]، وليست لـ[المهمة الأخرى].</span> <button class="copy-btn" onclick="copyHook('هذه الأداة ممتازة لـ[المهمة]، وليست لـ[المهمة الأخرى].')">نسخ</button></div>
+        <div class="starter-card"><span>25. الذكاء الاصطناعي يقترح؛ وأنت تتحقق من [العنصر].</span> <button class="copy-btn" onclick="copyHook('الذكاء الاصطناعي يقترح؛ وأنت تتحقق من [العنصر].')">نسخ</button></div>
+        <div class="starter-card"><span>26. لو ستختار خياراً واحداً: [أ] أم [ب]؟ ولماذا؟</span> <button class="copy-btn" onclick="copyHook('لو ستختار خياراً واحداً: [أ] أم [ب]؟ ولماذا؟')">نسخ</button></div>
+        <div class="starter-card"><span>27. أكمل الجملة: أصعب جزء في [الموضوع] هو ___.</span> <button class="copy-btn" onclick="copyHook('أكمل الجملة: أصعب جزء في [الموضوع] هو ___.')">نسخ</button></div>
+        <div class="starter-card"><span>28. خلف كواليس [النتيجة]: تفاصيل القرارات اليومية.</span> <button class="copy-btn" onclick="copyHook('خلف كواليس [النتيجة]: تفاصيل القرارات اليومية.')">نسخ</button></div>
+        <div class="starter-card"><span>29. من [الوضع القديم] إلى [النتيجة] باستخدام [الآلية].</span> <button class="copy-btn" onclick="copyHook('من [الوضع القديم] إلى [النتيجة] باستخدام [الآلية].')">نسخ</button></div>
+        <div class="starter-card"><span>30. إذا أردت [النتيجة]، نفّذ هذه [الخطوة الواحدة] اليوم.</span> <button class="copy-btn" onclick="copyHook('إذا أردت [النتيجة]، نفّذ هذه [الخطوة الواحدة] اليوم.')">نسخ</button></div>
+      </div>
+    </section>
+
+    <!-- ==================== المراجع والميثاق الأخلاقي ==================== -->
+    <section class="book-section">
+      <div class="section-header">
+        <h2 class="section-title"><span>📚</span> المراجع الرسمية والميثاق الأخلاقي للدليل</h2>
+        <span class="section-badge">ETHICS & REFERENCES</span>
+      </div>
+
+      <div class="colophon-card" style="margin-bottom: 1.5rem;">
+        <h3 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.1rem; margin-bottom: 0.75rem;">المصادر المرجعية والمنهج المعتمد:</h3>
+        <p style="font-size: 0.92rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1rem;">
+          هذا الدليل أداة تحريرية تطبيقية مبنية على مبادئ الوضوح الإعلاني، مطابقة الرسالة للهدف التسويقي، اختبار الإبداع بالبيانات، وتسديد الوعد بالكامل داخل المحتوى. تم الاستناد إلى الإرشادات الرسمية المعتمدة من كبرى المنصات العالمية:
+        </p>
+        <ul style="padding-right: 1.5rem; font-size: 0.88rem; line-height: 1.8; color: var(--text-muted);">
+          <li><strong>TikTok for Business — Spark Ads:</strong> مرجع رسمي يوضح طبيعة الإعلانات الأصلية وربط التفاعل بالمنشور العضوي.</li>
+          <li><strong>Meta for Business — Creative Guidance:</strong> مواصفات ومعايير صياغة الإعلانات عبر منصات فيسبوك وإنستغرام.</li>
+          <li><strong>YouTube Creator Academy:</strong> مواد رسمية لتطوير سرد المحتوى، لقطات البداية وفهم الجمهور المستهدف.</li>
+          <li><strong>Google Search Central — Title Links:</strong> إرشادات صياغة العناوين الوصفية الواضحة والابتعاد عن التضليل.</li>
+          <li><strong>Google Ads Help:</strong> المرجع الرسمي لمطابقة أهداف الحملات الإعلانية ومؤشرات القياس بالتحويل الفعلي.</li>
+        </ul>
+      </div>
+
+      <div class="callout-box" style="border-right-color: #ef4444; background: rgba(239, 68, 68, 0.05);">
+        <div class="callout-title" style="color: #f87171;"><span>⚖️</span> الميثاق الأخلاقي لصناعة الهوك:</div>
+        <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-main);">
+          «لا تستخدم الهوك مطلقاً لتقديم ادعاءات صحية أو مالية أو تعليمية غير مثبتة بالأدلة، أو لإخفاء الشروط الحقيقية للعرض، أو لصنع ندرة وهمية وخوف زائف. قوة الهوك الحقيقية لا تُقاس بعدد النقرات العابرة، بل بجودة الانتباه الصادق الذي يكتسبه، وبقدرة صانع المحتوى على الوفاء التام بكل وعد قطعه على نفسه.»
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== صفحة المؤلف والغلاف الخلفي ==================== -->
+    <footer id="author-bio" class="author-back-cover">
+      <img src="banner.jpg" alt="AI Navigators - Abo Aisel" class="author-banner-mini">
+      <h2 class="author-name">Abo Aisel</h2>
+      <div class="author-tagline">مؤسس مجتمع AI Navigators • مستشار الذكاء الاصطناعي وهندسة الأوامر</div>
+      
+      <p class="author-bio-text">
+        متخصص في استراتيجيات الذكاء الاصطناعي التوليدي، وتطويع تقنيات هندسة الأوامر (Prompt Engineering) لخدمة صناعة المحتوى، التسويق الرقمي، ونمو الأعمال.<br>
+        يقود مجتمع <strong>AI Navigators</strong> تحت رؤية راسخة: <em>«Better Prompts, Bigger Possibilities»</em>، بهدف تمكين رواد الأعمال وصناع الأثر الرقمي من توظيف الذكاء الاصطناعي بوعي واحترافية لصناعة نتائج استثنائية وبناء مجتمعات ذكية متكاملة.
+      </p>
+
+      <div class="community-pillars">
+        <div class="pillar-badge"><span>🧠</span> Learn Better — تعلّم أفضل</div>
+        <div class="pillar-badge"><span>💻</span> Build Smarter — ابنِ بذكاء</div>
+        <div class="pillar-badge"><span>💡</span> Create Bigger — ابتكر بأفق أوسع</div>
+        <div class="pillar-badge"><span>🚀</span> Grow Together — انمُ معنا</div>
+      </div>
+
+      <div class="contact-cta-box">
+        <div style="font-family: var(--font-heading); font-weight: 700; color: #fff; font-size: 1.05rem; margin-bottom: 0.4rem;">
+          هل ترغب في استشارة تسويقية أو الانضمام لمجتمع ملاحي الذكاء الاصطناعي؟
+        </div>
+        <div style="font-size: 0.92rem; color: #cbd5e1; margin-bottom: 0.5rem;">
+          تواصل مباشرة مع Abo Aisel عبر واتساب:
+        </div>
+        <a href="https://wa.me/201037489146" target="_blank" class="btn-whatsapp">
+          <span>💬</span> واتساب: 01037489146
+        </a>
+      </div>
+
+      <div style="margin-top: 2.5rem; font-size: 0.82rem; color: var(--text-dim); border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.25rem;">
+        جميع الحقوق محفوظة © 2026 • AI Navigators — Guiding Intelligent Future & Community
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- وظائف تفاعلية ذكية -->
+  <script>
+    // 1. شريط تقدم القراءة وزر الصعود للأعلى
+    const progressBar = document.getElementById('reading-progress');
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / docHeight) * 100;
+      progressBar.style.width = scrolled + '%';
+
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 2. إشعار التوست العائم
+    function showToast(msg) {
+      const toast = document.getElementById('toast-notification');
+      document.getElementById('toast-msg').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // نسخ النصوص والمعادلات
+    function copyHook(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('تم نسخ المعادلة بنجاح: ' + text.substring(0, 30) + '...');
+        }).catch(() => fallbackPrompt(text));
+      } else {
+        fallbackPrompt(text);
+      }
+    }
+
+    function fallbackPrompt(text) {
+      prompt('انسخ النص التالي:', text);
+    }
+
+    // 3. تبديل مظهر القراءة (Dark / Light Theme)
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('hook_theme', newTheme);
+      updateThemeUI(newTheme);
+      showToast(newTheme === 'light' ? 'تم التبديل للوضع الفاتح ☀️' : 'تم التبديل للوضع الداكن 🌙');
+    }
+
+    function updateThemeUI(theme) {
+      const icon = document.getElementById('theme-icon');
+      const text = document.getElementById('theme-text');
+      if (theme === 'light') {
+        icon.innerText = '🌙';
+        text.innerText = 'داكن';
+      } else {
+        icon.innerText = '☀️';
+        text.innerText = 'فاتح';
+      }
+    }
+
+    // استعادة مظهر القراءة المحفوظ
+    const savedTheme = localStorage.getItem('hook_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeUI(savedTheme);
+
+    // 4. البحث والتصفية الحية عبر الفئات والمعادلات
+    const searchInput = document.getElementById('hook-search');
+    const cards = document.querySelectorAll('.category-card');
+
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.trim().toLowerCase();
+      document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.chip-btn:first-child').classList.add('active');
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(term)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+
+    function filterCategory(catTag) {
+      document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      searchInput.value = '';
+
+      cards.forEach(card => {
+        if (catTag === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          const tags = card.getAttribute('data-tags') || '';
+          if (tags.includes(catTag)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        }
+      });
+    }
+
+    // 5. حاسبة مقياس الـ 20 نقطة اللحظية
+    function calculateRubric() {
+      const c = parseInt(document.getElementById('slider-clarity').value);
+      const r = parseInt(document.getElementById('slider-relevance').value);
+      const i = parseInt(document.getElementById('slider-impact').value);
+      const cr = parseInt(document.getElementById('slider-credibility').value);
+      const al = parseInt(document.getElementById('slider-alignment').value);
+
+      document.getElementById('val-clarity').innerText = c + ' / 4';
+      document.getElementById('val-relevance').innerText = r + ' / 4';
+      document.getElementById('val-impact').innerText = i + ' / 4';
+      document.getElementById('val-credibility').innerText = cr + ' / 4';
+      document.getElementById('val-alignment').innerText = al + ' / 4';
+
+      const total = c + r + i + cr + al;
+      document.getElementById('rubric-total').innerText = total;
+
+      const verdict = document.getElementById('rubric-verdict');
+      if (total >= 17) {
+        verdict.innerText = '🔥 استثنائي وجاهز للنشر والاختبار فوراً!';
+        verdict.style.background = 'rgba(34, 197, 94, 0.2)';
+        verdict.style.color = '#4ade80';
+        verdict.style.borderColor = '#22c55e';
+      } else if (total >= 13) {
+        verdict.innerText = '✨ جيد جداً، يحتاج لرفع درجة التحديد اللفظي.';
+        verdict.style.background = 'rgba(251, 191, 36, 0.2)';
+        verdict.style.color = '#fbbf24';
+        verdict.style.borderColor = '#f59e0b';
+      } else if (total >= 9) {
+        verdict.innerText = '⚠️ متوسط، أعد مراجعة الزاوية والوعد قبل الإطلاق.';
+        verdict.style.background = 'rgba(249, 115, 22, 0.2)';
+        verdict.style.color = '#fb923c';
+        verdict.style.borderColor = '#ea580c';
+      } else {
+        verdict.innerText = '🛑 ضعيف وغير مكتمل، أعد صياغته من ورقة التشخيص.';
+        verdict.style.background = 'rgba(239, 68, 68, 0.2)';
+        verdict.style.color = '#f87171';
+        verdict.style.borderColor = '#dc2626';
+      }
+    }
+
+    // 6. تفاعل بنود قائمة الفحص وحفظ حالتها في localStorage
+    const savedChecks = JSON.parse(localStorage.getItem('hook_checklist_state') || '{}');
+
+    document.querySelectorAll('.checklist-item').forEach(item => {
+      const checkbox = item.querySelector('.checklist-checkbox');
+      const idx = checkbox.getAttribute('data-index');
+
+      if (savedChecks[idx]) {
+        checkbox.checked = true;
+        item.classList.add('checked');
+      }
+
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          item.classList.add('checked');
+          savedChecks[idx] = true;
+        } else {
+          item.classList.remove('checked');
+          delete savedChecks[idx];
+        }
+        localStorage.setItem('hook_checklist_state', JSON.stringify(savedChecks));
+      });
+    });
+
+    // 7. حفظ وتصدير ورقة العمل
+    const wsFields = ['ws-project', 'ws-audience', 'ws-awareness', 'ws-goal', 'ws-problem', 'ws-voice', 'ws-proof', 'ws-category', 'ws-angle-a', 'ws-angle-b', 'ws-angle-c', 'ws-final-hook', 'ws-cta', 'ws-kpi'];
+
+    // استعادة قيم ورقة العمل
+    wsFields.forEach(id => {
+      const el = document.getElementById(id);
+      const val = localStorage.getItem('ws_' + id);
+      if (val && el) el.value = val;
+
+      if (el) {
+        el.addEventListener('input', () => {
+          localStorage.setItem('ws_' + id, el.value);
+        });
+      }
+    });
+
+    // إفراغ ورقة العمل
+    function resetWorksheet() {
+      if (confirm('هل ترغب في مسح جميع البيانات المكتوبة في ورقة العمل؟')) {
+        wsFields.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+          localStorage.removeItem('ws_' + id);
+        });
+        showToast('تم إفراغ ورقة العمل بنجاح 🔄');
+      }
+    }
+
+    // تصدير ورقة العمل كنص ماركداون
+    function exportWorksheet() {
+      const project = document.getElementById('ws-project').value || 'مشروع غير مسمى';
+      const audience = document.getElementById('ws-audience').value || 'غير محدد';
+      const hook = document.getElementById('ws-final-hook').value || 'لم يتم تحديد الهوك بعد';
+      const cta = document.getElementById('ws-cta').value || 'غير محدد';
+
+      const mdSummary = `# ورقة هندسة الهوك: ${project}
+- **الجمهور المستهدف:** ${audience}
+- **الهدف التسويقي:** ${document.getElementById('ws-goal').value}
+- **المشكلة الحقيقية:** ${document.getElementById('ws-problem').value}
+- **لغة العميل:** ${document.getElementById('ws-voice').value}
+- **الهوك النهائي المعتمد:** «${hook}»
+- **الدعوة للفعل (CTA):** ${cta}
+- **مؤشر النجاح (KPI):** ${document.getElementById('ws-kpi').value}
+— معد عبر دليل هندسة الهوك (Abo Aisel • AI Navigators)`;
+
+      copyHook(mdSummary);
+      showToast('تم نسخ ملخص ورقة العمل للحافظة كـ Markdown! 📋');
+    }
+  </script>
+</body>
+</html>
