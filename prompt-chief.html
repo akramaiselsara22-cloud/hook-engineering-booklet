@@ -787,6 +787,81 @@
       transform: translateX(50%) translateY(0);
       opacity: 1;
     }
+
+    /* صندوق السعر والعرض الحصري */
+    .pricing-hero-box {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(251, 191, 36, 0.15) 100%);
+      border: 2px solid var(--accent-gold);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 2rem;
+      max-width: 650px;
+      margin: 0 auto 2.25rem auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(251, 191, 36, 0.15);
+      position: relative;
+    }
+
+    .pricing-tag {
+      position: absolute;
+      top: -14px;
+      right: 50%;
+      transform: translateX(50%);
+      background: linear-gradient(90deg, #ef4444, #f97316);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 0.85rem;
+      padding: 0.25rem 1.25rem;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+      white-space: nowrap;
+    }
+
+    .pricing-content {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+
+    .price-values {
+      text-align: right;
+    }
+
+    .price-old {
+      font-size: 1.2rem;
+      color: var(--text-dim);
+      text-decoration: line-through;
+      margin-left: 0.75rem;
+      font-family: var(--font-heading);
+    }
+
+    .price-current {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #22c55e;
+      font-family: var(--font-heading);
+      line-height: 1;
+    }
+
+    .price-currency {
+      font-size: 1.1rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-right: 0.35rem;
+    }
+
+    .price-savings {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-full);
+      margin-top: 0.35rem;
+    }
+
   </style>
 </head>
 <body>
@@ -818,8 +893,8 @@
       <button onclick="toggleTheme()" class="btn-nav" id="theme-btn">
         <span id="theme-icon">☀️</span>
       </button>
-      <a href="https://wa.me/201037489146?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%A3%D9%83%D8%B1%D9%85%20(Abo%20Aisel%20ELmasry)%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%B7%D9%84%D8%A8%20%D9%85%D9%88%D8%B3%D9%88%D8%B9%D8%A9%20Prompt%20Chief%20%D8%A7%D9%84%D9%85%D8%AC%D9%84%D8%AF%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB" target="_blank" class="btn-nav btn-nav-primary">
-        <span>💬</span> طلب المجلد الماسي
+      <a href="https://wa.me/201037489146?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%A3%D9%83%D8%B1%D9%85%20(Abo%20Aisel%20ELmasry)%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D8%A9%20%D9%85%D9%86%20%D8%B9%D8%B1%D8%B6%20%D9%85%D9%88%D8%B3%D9%88%D8%B9%D8%A9%20Prompt%20Chief%20%D8%A7%D9%84%D8%AD%D8%B5%D8%B1%D9%8A%20%D8%A8%D9%80%20299%20%D8%AC%D9%86%D9%8A%D9%87%20%D8%A8%D8%AF%D9%84%D8%A7%D9%8B%20%D9%85%D9%86%20499%20%D8%AC%D9%86%D9%8A%D9%87" target="_blank" class="btn-nav btn-nav-primary">
+        <span>🔥</span> فقط بـ 299 ج.م (لفترة محدودة)
       </a>
     </div>
   </nav>
@@ -869,8 +944,30 @@
         </div>
       </div>
 
+      <!-- صندوق السعر والعرض الحصري -->
+      <div class="pricing-hero-box">
+        <div class="pricing-tag">⏳ عرض حصري وخاص جداً ولفترة محدودة</div>
+        <div class="pricing-content">
+          <div class="price-values">
+            <div>
+              <span class="price-current">299</span>
+              <span class="price-currency">جنيه مصري</span>
+              <span class="price-old">499 ج.م</span>
+            </div>
+            <div class="price-savings">خصم 40% • وفر 200 جنيه الآن فوراً</div>
+          </div>
+          <div>
+            <div style="font-size: 0.92rem; font-weight: 700; color: #fff; margin-bottom: 0.25rem;">
+              يشمل المجلد الثالث كاملاً (630 صفحة PDF):
+            </div>
+            <div style="font-size: 0.85rem; color: #cbd5e1;">
+              ✓ 50 قائمة تحقق • 100 برومبت • العقل الثاني
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="hero-action-buttons">
-        <a href="https://wa.me/201037489146?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%A3%D9%83%D8%B1%D9%85%20(Abo%20Aisel%20ELmasry)%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%B7%D9%84%D8%A8%20%D9%85%D9%88%D8%B3%D9%88%D8%B9%D8%A9%20Prompt%20Chief%20%D8%A7%D9%84%D9%85%D8%AC%D9%84%D8%AF%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%83%D8%A7%D9%85%D9%84%D8%A7%D9%8B" target="_blank" class="btn-hero-primary">
+        <a href="https://wa.me/201037489146?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%A3%D9%83%D8%B1%D9%85%20(Abo%20Aisel%20ELmasry)%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D8%A9%20%D9%85%D9%86%20%D8%B9%D8%B1%D8%B6%20%D9%85%D9%88%D8%B3%D9%88%D8%B9%D8%A9%20Prompt%20Chief%20%D8%A7%D9%84%D8%AD%D8%B5%D8%B1%D9%8A%20%D8%A8%D9%80%20299%20%D8%AC%D9%86%D9%8A%D9%87%20%D8%A8%D8%AF%D9%84%D8%A7%D9%8B%20%D9%85%D9%86%20499%20%D8%AC%D9%86%D9%8A%D9%87%20%D9%83%D8%A7%D9%85%D9%84%D8%A7%D9%8B" target="_blank" class="btn-hero-primary">
           <span>💬</span> طلب النسخة الكاملة عبر واتساب (01037489146)
         </a>
         <a href="#checklists" class="btn-hero-secondary">
@@ -1230,6 +1327,48 @@
         <div class="chapter-item" style="border-color: var(--accent-gold); background: rgba(251, 191, 36, 0.08);"><span class="chap-badge" style="background: var(--accent-gold); color: #000;">فصل 28</span> <strong>مكتبة الـ 100 برومبت هندسي في 10 تخصصات</strong></div>
         <div class="chapter-item"><span class="chap-badge">فصل 29</span> <span>معمارية Personal Operating Desk</span></div>
         <div class="chapter-item"><span class="chap-badge">فصل 30</span> <span>خطة الـ 14 والـ 90 يوماً لبناء النظام المتكامل</span></div>
+      </div>
+    </section>
+
+    <!-- ==================== قسم حجز العرض الحصري ==================== -->
+    <section id="pricing-offer" class="portal-section" style="border-color: var(--accent-gold); background: linear-gradient(135deg, rgba(20, 32, 54, 0.95) 0%, rgba(10, 18, 32, 0.98) 100%); text-align: center;">
+      <div class="hero-pill-badge" style="background: rgba(239, 68, 68, 0.15); border-color: #ef4444; color: #f87171;">
+        <span>🔥</span> عرض محدود المدة والتوزيع
+      </div>
+      <h2 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 0.75rem;">
+        احصل على موسوعة <span style="color: var(--accent-gold);">PROMPT CHIEF</span> بسعر الإطلاق الحصري
+      </h2>
+      <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 720px; margin: 0 auto 2rem auto; line-height: 1.8;">
+        فقط وحصرياً ولفترة محدودة: امتلك المجلد الثالث كاملاً (630 صفحة) بـ <strong>299 جنيه مصري فقط</strong> بدلاً من <del style="opacity: 0.6;">499 جنيه</del>، مع استلام فوري لملف الـ PDF وكافة القوائم والبرومبتات.
+      </p>
+
+      <div class="pricing-hero-box" style="margin-bottom: 2rem;">
+        <div class="pricing-tag">وفر 200 جنيه مصري (خصم 40%)</div>
+        <div class="pricing-content">
+          <div class="price-values">
+            <span class="price-current">299</span>
+            <span class="price-currency">جنيه مصري</span>
+            <span class="price-old">499 ج.م</span>
+          </div>
+          <div style="text-align: right; font-size: 0.9rem; line-height: 1.8; color: #e2e8f0;">
+            <div>✅ <strong>630 صفحة</strong> تحريرية عالية الدقة والوضوح.</div>
+            <div>✅ <strong>50 قائمة تحقق تشغيلية</strong> تغطي كافة جوانب الذكاء الاصطناعي.</div>
+            <div>✅ <strong>100 برومبت تطبيقي</strong> في 10 مكتبات تخصصية تمنع الهلوسة.</div>
+            <div>✅ <strong>نظام العقل الثاني</strong> وخرائط طريق الـ 14 والـ 90 يوماً.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="https://wa.me/201037489146?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%A3%D9%83%D8%B1%D9%85%20(Abo%20Aisel%20ELmasry)%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D8%A9%20%D9%85%D9%86%20%D8%B9%D8%B1%D8%B6%20%D9%85%D9%88%D8%B3%D9%88%D8%B9%D8%A9%20Prompt%20Chief%20%D8%A7%D9%84%D8%AD%D8%B5%D8%B1%D9%8A%20%D8%A8%D9%80%20299%20%D8%AC%D9%86%D9%8A%D9%87%20%D8%A8%D8%AF%D9%84%D8%A7%D9%8B%20%D9%85%D9%86%20499%20%D8%AC%D9%86%D9%8A%D9%87" target="_blank" class="btn-hero-primary" style="font-size: 1.15rem; padding: 1rem 2.5rem;">
+          <span>💬</span> اطلب المجلد الآن بـ 299 ج.م عبر واتساب (01037489146)
+        </a>
+        <a href="mailto:aisel.strategy@gmail.com?subject=طلب%20عرض%20موسوعة%20Prompt%20Chief%20الحصري%20بـ%20299%20جنيه" class="btn-hero-secondary" style="font-size: 1.05rem; padding: 1rem 2rem;">
+          <span>✉️</span> حجز عبر البريد الرسمي
+        </a>
+      </div>
+      <div style="margin-top: 1.25rem; font-size: 0.85rem; color: var(--text-dim);">
+        🛡️ ترخيص استخدام شخصي ومهني معتمد • حقوق الملكية الفكرية محفوظة 2026 لـ Abo Aisel ELmasry
       </div>
     </section>
 
