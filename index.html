@@ -90,6 +90,7 @@
     }
 
     html {
+      scroll-margin-top: 90px;
       scroll-behavior: smooth;
       background-color: var(--bg-primary);
       color: var(--text-main);
@@ -541,6 +542,7 @@
 
     /* أقسام المحتوى */
     .book-section {
+      scroll-margin-top: 90px;
       margin-bottom: 3.5rem;
     }
 
@@ -1855,7 +1857,7 @@
       <button onclick="toggleTheme()" class="btn-nav" id="theme-toggle-btn" title="تبديل مظهر القراءة">
         <span id="theme-icon">☀️</span> <span id="theme-text">فاتح</span>
       </button>
-      <a href="#prompt-chief" class="btn-nav" style="border-color: var(--accent-gold); color: var(--accent-gold);">
+      <a href="prompt-chief.html" class="btn-nav" style="border-color: var(--accent-gold); color: var(--accent-gold);">
         <span>👑</span> Prompt Chief
       </a>
       <button onclick="openLegalModal()" class="btn-nav" style="border-color: rgba(255,255,255,0.2);">
@@ -1885,10 +1887,12 @@
       <h1 class="cover-title">هندسة <span>الهوك</span></h1>
       <p class="cover-subtitle">لصناعة المحتوى والتسويق الرقمي: معادلات قابلة للملء • أمثلة متعددة • تطبيقات حسب المنصة • اختبارات وتحسين • برومبتات الذكاء الاصطناعي</p>
       
-      <div style="background: rgba(251, 191, 36, 0.12); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: var(--radius-md); padding: 0.6rem 1.25rem; margin: 1.25rem auto 1.5rem auto; max-width: 680px; display: flex; align-items: center; justify-content: center; gap: 0.6rem; font-family: var(--font-heading); font-size: 0.95rem; color: var(--accent-gold); box-shadow: 0 4px 15px rgba(251, 191, 36, 0.1);">
-        <span>👑</span>
-        <span>مرجع تطبيقي منبثق من منظومة: <strong>PROMPT CHIEF</strong> (المجلد الثالث: Masterpiece Edition — 630 صفحة)</span>
-      </div>
+      <a href="prompt-chief.html" style="text-decoration: none; display: block;">
+        <div style="background: rgba(251, 191, 36, 0.12); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: var(--radius-md); padding: 0.6rem 1.25rem; margin: 1.25rem auto 1.5rem auto; max-width: 680px; display: flex; align-items: center; justify-content: center; gap: 0.6rem; font-family: var(--font-heading); font-size: 0.95rem; color: var(--accent-gold); box-shadow: 0 4px 15px rgba(251, 191, 36, 0.1); transition: all 0.2s ease;">
+          <span>👑</span>
+          <span>مرجع تطبيقي منبثق من منظومة: <strong>PROMPT CHIEF</strong> (المجلد الثالث: Masterpiece Edition — 630 صفحة) ⬅️ اضغط هنا لفتح صفحة الموسوعة</span>
+        </div>
+      </a>
       
       <div class="cover-stats-pill">
         <span>⚡ <strong>16 فئة</strong> تصنيفية</span> •
@@ -1991,7 +1995,7 @@
         <a href="#ideation-testing" class="toc-link"><span>نظام 10 هوكات واختبار A/B</span> <span class="toc-num">T</span></a>
         <a href="#checklist" class="toc-link"><span>قائمة المراجعة وحاسبة التقييم</span> <span class="toc-num">C</span></a>
         <a href="#ai-prompts" class="toc-link" style="color: var(--accent-purple); font-weight: 700;"><span>ملحق: 7 برومبتات AI تطبيقية</span> <span class="toc-num">AI</span></a>
-        <a href="#prompt-chief" class="toc-link" style="color: var(--accent-gold); font-weight: 800; border-color: rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.08);"><span>👑 موسوعة PROMPT CHIEF (المجلد الماسي 630 صفحة)</span> <span class="toc-num" style="background: var(--accent-gold); color: #000;">PC</span></a>
+        <a href="prompt-chief.html" class="toc-link" style="color: var(--accent-gold); font-weight: 800; border-color: rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.08);"><span>👑 بوابة موسوعة PROMPT CHIEF الكاملة (صفحة مستقلة 630 صفحة)</span> <span class="toc-num" style="background: var(--accent-gold); color: #000;">PC</span></a>
         <a href="javascript:void(0)" onclick="openLegalModal()" class="toc-link" style="color: var(--accent-cyan); font-weight: 700;"><span>⚖️ سياسة الاسترداد وحقوق النشر الرسمية</span> <span class="toc-num">LAW</span></a>
         <a href="#worksheet" class="toc-link"><span>ورقة العمل القابلة للنسخ والملء</span> <span class="toc-num">W</span></a>
         <a href="#starters-bank" class="toc-link"><span>بنك سريع: 30 بداية جاهزة</span> <span class="toc-num">B</span></a>
@@ -3883,42 +3887,45 @@
         </p>
 
         <div class="pc-grid">
-          <div class="pc-feature-box">
+          <a href="prompt-chief.html#checklists" class="pc-feature-box" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
             <div class="pc-feature-icon">📋</div>
-            <div class="pc-feature-title">50 قائمة تحقق تشغيلية (Checklists)</div>
+            <div class="pc-feature-title">50 قائمة تحقق تشغيلية (Checklists) ⬅️</div>
             <div class="pc-feature-text">
-              الفصل 27 كاملاً: 5 مجموعات تضم 50 قائمة تشغيلية متدرجة تغطي: هندسة البرومبتات وبناء السياق، إدارة وتنظيم المعرفة الشخصية (PKM)، استراتيجيات البحث وتدقيق الحقائق، صناعة المحتوى والسوشيال ميديا، وإطلاق المشاريع وتأسيس وكالات الـ AI.
+              الفصل 27 كاملاً: 5 مجموعات تضم 50 قائمة تشغيلية متدرجة تغطي: هندسة البرومبتات وبناء السياق، إدارة وتنظيم المعرفة الشخصية (PKM)، استراتيجيات البحث وتدقيق الحقائق، صناعة المحتوى، وإطلاق وكالات الـ AI. (اضغط للاستعراض).
             </div>
-          </div>
+          </a>
 
-          <div class="pc-feature-box">
+          <a href="prompt-chief.html#prompts-library" class="pc-feature-box" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
             <div class="pc-feature-icon">⚡</div>
-            <div class="pc-feature-title">100 برومبت هندسي في 10 مكتبات تخصصية</div>
+            <div class="pc-feature-title">100 برومبت هندسي في 10 مكتبات ⬅️</div>
             <div class="pc-feature-text">
-              الفصل 28 كاملاً: 100 برومبت تشغيلي بمواصفات هندسية تمنع الهلوسة عبر 10 مكتبات: (الكتابة، البحث، التعلم، إدارة المعرفة، صناعة المحتوى، التسويق الرقمي، تطوير الأعمال، الإنتاجية الشخصية، وكالات الذكاء الاصطناعي، وهندسة البرومبتات المتقدمة).
+              الفصل 28 كاملاً: 100 برومبت تشغيلي بمواصفات هندسية تمنع الهلوسة عبر 10 مكتبات: (الكتابة، البحث، التعلم، إدارة المعرفة، صناعة المحتوى، التسويق، الأعمال، والوكالات). (اضغط للاستعراض).
             </div>
-          </div>
+          </a>
 
-          <div class="pc-feature-box">
+          <a href="prompt-chief.html#second-brain" class="pc-feature-box" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
             <div class="pc-feature-icon">🧠</div>
-            <div class="pc-feature-title">معمارية العقل الثاني (Second Brain)</div>
+            <div class="pc-feature-title">معمارية العقل الثاني (Second Brain) ⬅️</div>
             <div class="pc-feature-text">
-              الفصول 29 و 30: هندسة الـ Personal Operating Desk لتحويل الفوضى الذهنية وتشتت أدوات الذكاء الاصطناعي إلى مكتبة أصول رقمية متراكمة تخدم قراراتك اليومية وتسرّع وتيرة أعمالك.
+              الفصول 29 و 30: هندسة الـ Personal Operating Desk لتحويل الفوضى الذهنية وتشتت أدوات الذكاء الاصطناعي إلى مكتبة أصول رقمية متراكمة تخدم قراراتك اليومية. (اضغط للاستعراض).
             </div>
-          </div>
+          </a>
 
-          <div class="pc-feature-box">
+          <a href="prompt-chief.html#chapters-index" class="pc-feature-box" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
             <div class="pc-feature-icon">🗺️</div>
-            <div class="pc-feature-title">خرائط الطريق والميثاق الأخلاقي (14 & 90 Days)</div>
+            <div class="pc-feature-title">الفهرس الكامل وخرائط الطريق ⬅️</div>
             <div class="pc-feature-text">
-              خطة إطلاق النظام في 14 يوماً للمستعجلين، وخطة الـ 90 يوماً للتحول المؤسسي الاحترافي، مع ميثاق أخلاقي مهني صارم للاستخدام الآمن والمسؤول لتقنيات الذكاء الاصطناعي.
+              استعراض الفهرس التوثيقي الكامل للفصول الـ 30 في كتاب Prompt Chief مع خطة الـ 14 يوماً والـ 90 يوماً والميثاق الأخلاقي. (اضغط للاستعراض).
             </div>
-          </div>
+          </a>
         </div>
 
         <div class="pc-cta-container">
           <div class="pc-cta-title">احصل على نسختك من المجلد الماسي أو استشر المؤلف لبناء أنظمة شركتك:</div>
           <div class="pc-cta-buttons">
+            <a href="prompt-chief.html" class="btn-pc-email" style="background: linear-gradient(135deg, #fbbf24, #d97706); color: #000; font-weight: 900; font-size: 1.05rem; padding: 0.85rem 2rem; box-shadow: 0 4px 18px rgba(251, 191, 36, 0.4);">
+              <span>📖</span> فتح بوابة موسوعة Prompt Chief كاملة (صفحة مخصصة) ⬅️
+            </a>
             <a href="https://wa.me/201037489146?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%A3%D9%83%D8%B1%D9%85%20(Abo%20Aisel%20ELmasry)%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%85%D9%88%D8%B3%D9%88%D8%B9%D8%A9%20Prompt%20Chief%20%D8%A7%D9%84%D9%85%D8%AC%D9%84%D8%AF%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20(Masterpiece%20Edition)%20%D9%88%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A7%D8%AA" target="_blank" class="btn-pc-whatsapp">
               <span>💬</span> طلب المجلد الماسي عبر واتساب (01037489146)
             </a>
