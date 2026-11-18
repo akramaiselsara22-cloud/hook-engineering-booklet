@@ -1846,6 +1846,13 @@
       user-select: text !important;
     }
 
+
+    @media print {
+      body {
+        display: none !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1888,9 +1895,9 @@
       <a href="#worksheet" class="btn-nav">
         <span>✏️</span> ورقة العمل
       </a>
-      <button onclick="window.print()" class="btn-nav btn-nav-primary">
-        <span>🖨️</span> حفظ PDF / طباعة
-      </button>
+      <a href="https://wa.me/201037489146" target="_blank" class="btn-nav btn-nav-primary">
+        <span>💬</span> تواصل واتساب
+      </a>
     </div>
   </nav>
 
@@ -4309,7 +4316,7 @@
 
       <div class="modal-footer">
         <button class="btn-nav" onclick="closeLegalModalDirect()">إغلاق النافذة</button>
-        <button class="btn-nav btn-nav-primary" onclick="window.print()">طباعة الوثيقة 🖨️</button>
+        
       </div>
     </div>
   </div>
