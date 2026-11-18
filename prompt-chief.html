@@ -862,6 +862,22 @@
       margin-top: 0.35rem;
     }
 
+
+    /* ==================== حماية المحتوى من النسخ والتحديد ==================== */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    input, textarea, select {
+      -webkit-user-select: text !important;
+      -moz-user-select: text !important;
+      -ms-user-select: text !important;
+      user-select: text !important;
+    }
+
   </style>
 </head>
 <body>
@@ -1459,5 +1475,62 @@
       });
     }
   </script>
+
+  <!-- ==================== كود حماية المحتوى والملكية الفكرية ==================== -->
+  <script>
+    // 1. منع النقر بزر الفأرة الأيمن (Disable Right-Click)
+    document.addEventListener('contextmenu', (e) => {
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+      if (tag !== 'input' && tag !== 'textarea') {
+        e.preventDefault();
+        if (typeof showToast === 'function') {
+          showToast('🔒 المحتوى محمي بحقوق النشر © 2026 لـ Abo Aisel ELmasry');
+        }
+        return false;
+      }
+    });
+
+    // 2. منع اختصارات لوحة المفاتيح المعتادة (Ctrl+C, Ctrl+U, Ctrl+S, F12, Ctrl+Shift+I)
+    document.addEventListener('keydown', (e) => {
+      const tag = (document.activeElement && document.activeElement.tagName) ? document.activeElement.tagName.toLowerCase() : '';
+
+      // منع فحص العنصر وحفظ الصفحة وعرض السورس (F12, Ctrl+U, Ctrl+S, Ctrl+Shift+I/J/C)
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C'))
+      ) {
+        e.preventDefault();
+        if (typeof showToast === 'function') {
+          showToast('⚠️ فحص وحفظ الصفحة غير متاح لحماية الأصول الفكرية');
+        }
+        return false;
+      }
+
+      // منع النسخ عبر لوحة المفاتيح (Ctrl+C) خارج حقول الكتابة
+      if (e.ctrlKey && (e.key === 'c' || e.key === 'C')) {
+        if (tag !== 'input' && tag !== 'textarea') {
+          e.preventDefault();
+          if (typeof showToast === 'function') {
+            showToast('⚠️ نسخ النصوص محمي بحقوق الملكية الفكرية');
+          }
+          return false;
+        }
+      }
+    });
+
+    // 3. منع حدث النسخ المباشر
+    document.addEventListener('copy', (e) => {
+      const tag = (document.activeElement && document.activeElement.tagName) ? document.activeElement.tagName.toLowerCase() : '';
+      if (tag !== 'input' && tag !== 'textarea') {
+        e.preventDefault();
+        if (typeof showToast === 'function') {
+          showToast('🔒 محتوى الدليل مسجل ومحمي رسمياً');
+        }
+        return false;
+      }
+    });
+  </script>
+
 </body>
 </html>
